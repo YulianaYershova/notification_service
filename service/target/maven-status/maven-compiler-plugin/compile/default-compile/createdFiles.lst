@@ -1,0 +1,3 @@
+com\fit_goal\NotificatorService.class
+com\fit_goal\EventRegisterService.class
+com\fit_goal\util\MailSender.class

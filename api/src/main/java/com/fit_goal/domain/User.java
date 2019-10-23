@@ -1,28 +1,23 @@
 package com.fit_goal.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 
 @Getter
 @Setter
-public class User extends BaseEntity implements Serializable {
+@NoArgsConstructor
+public class User {
 
     @NotNull
-    @Email
     private String email;
-    private String password;
 
+    @JsonProperty
     @NotNull
-    private String verificationToken;
-
-    public User(@NotNull @Email String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
+    private String verificationLink;
 
 }

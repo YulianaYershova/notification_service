@@ -1,0 +1,3 @@
+com\fit_goal\domain\User.class
+com\fit_goal\api\Notificator.class
+com\fit_goal\api\EventRegister.class
