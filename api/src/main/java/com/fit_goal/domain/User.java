@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 
 @Getter
@@ -13,11 +14,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class User {
 
-    @NotNull
+    @NotEmpty
+    @Email
     private String email;
 
+    @NotEmpty
     @JsonProperty
-    @NotNull
     private String verificationLink;
 
 }

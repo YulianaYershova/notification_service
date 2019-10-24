@@ -13,20 +13,25 @@ public class EventDaoImpl extends AbstractDAO<EventDto> implements EventDao {
     }
 
     @Override
+    @UnitOfWork
     public EventDto findById(Long id) {
         return get(id);
     }
 
     @Override
+    @UnitOfWork
     public long create(EventDto eventDto) {
         return persist(eventDto).getId();
     }
 
     @Override
+    @UnitOfWork
     public void update(EventDto eventDto) {
 
     }
+
     @Override
+    @UnitOfWork
     public void delete(EventDto eventDto) {
 
     }

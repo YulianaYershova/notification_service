@@ -1,7 +1,8 @@
 package com.fit_goal.api;
 
-import com.fit_goal.domain.Event;
+import com.fit_goal.domain.EventDto;
 
 public interface EventRegistrar {
-    void registerEvent(Event event);
+    void registerEvent(EventDto event);
 }
+

@@ -1,3 +1,4 @@
-com\fit_goal\NotificatorService.class
-com\fit_goal\EventRegisterService.class
-com\fit_goal\util\MailSender.class
+com\fit_goal\MailSender.class
+com\fit_goal\service\EventRegistrarService.class
+com\fit_goal\impl\MailSenderImpl.class
+com\fit_goal\service\NotificatorService.class
