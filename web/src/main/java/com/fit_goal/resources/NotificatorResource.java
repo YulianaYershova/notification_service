@@ -11,6 +11,7 @@ import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -41,12 +42,12 @@ public class NotificatorResource {
     }
 
     @POST
-    @Path("/register/success")
+    @Path("/register/success/{email}")
     @Timed
     @UnitOfWork
-    public Response registerSuccess(@NotNull @Valid User user) {
+    public Response registerSuccess(@NotNull @Email String email) {
         Notification notification = new Notification(Subject.SUCCESS_REGISTRATION_SUBJECT, Message.SUCCESS_REGISTRATION_MESSAGE);
-        notificator.sendNotification(user.getEmail(), notification);
+        notificator.sendNotification(email, notification);
         return Response.ok().build();
     }
 
