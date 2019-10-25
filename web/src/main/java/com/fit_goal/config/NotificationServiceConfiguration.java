@@ -5,11 +5,61 @@ import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class NotificationServiceConfiguration extends Configuration {
+    @JsonProperty
+    @NotEmpty
+    public String mongoHost;
 
-    @Valid
+    @JsonProperty
+    @Min(1)
+    @Max(65535)
+    public int mongoPort;
+
+    @JsonProperty
+    @NotEmpty
+    public String mongoDB;
+
+    @JsonProperty
+    @NotEmpty
+    public String collectionName;
+
+    public String getMongoHost() {
+        return mongoHost;
+    }
+
+    public void setMongoHost(String mongoHost) {
+        this.mongoHost = mongoHost;
+    }
+
+    public int getMongoPort() {
+        return mongoPort;
+    }
+
+    public void setMongoPort(int mongoPort) {
+        this.mongoPort = mongoPort;
+    }
+
+    public String getMongoDB() {
+        return mongoDB;
+    }
+
+    public void setMongoDB(String mongoDB) {
+        this.mongoDB = mongoDB;
+    }
+
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
+    }
+   /* @Valid
     @NotNull
     private DataSourceFactory database = new DataSourceFactory();
 
@@ -21,5 +71,5 @@ public class NotificationServiceConfiguration extends Configuration {
     @JsonProperty("database")
     public void setDatabase(DataSourceFactory database) {
         this.database = database;
-    }
+    }*/
 }
