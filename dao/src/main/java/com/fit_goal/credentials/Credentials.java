@@ -1,4 +1,4 @@
-package com.fit_goal;
+package com.fit_goal.credentials;
 
 
 import lombok.Getter;

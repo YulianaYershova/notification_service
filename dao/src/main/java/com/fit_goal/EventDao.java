@@ -5,11 +5,11 @@ import com.fit_goal.domain.EventDto;
 
 public interface EventDao {
 
-    EventDto findById(Long id);
+    void create(EventDto eventDto);
 
-    long create(EventDto eventDto);
+   /* EventDto findById(Long id);
 
     void update(EventDto eventDto);
 
-    void delete(EventDto eventDto);
+    void delete(EventDto eventDto);*/
 }

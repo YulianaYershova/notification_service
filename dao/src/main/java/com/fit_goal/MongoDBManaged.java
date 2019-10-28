@@ -1,6 +1,6 @@
 package com.fit_goal;
 
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
 import io.dropwizard.lifecycle.Managed;
 
 public class MongoDBManaged implements Managed {

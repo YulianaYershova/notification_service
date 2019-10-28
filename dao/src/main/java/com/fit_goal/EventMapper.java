@@ -3,6 +3,8 @@ package com.fit_goal;
 import com.fit_goal.domain.EventDto;
 import org.bson.Document;
 
+import java.time.ZoneId;
+
 public class EventMapper {
 
     /**
@@ -13,9 +15,10 @@ public class EventMapper {
      */
     public static EventDto map(final Document document) {
         final EventDto eventDto = new EventDto();
-        eventDto.setId(document.getLong("_id"));
+        eventDto.setId(document.getObjectId("_id"));
         eventDto.setEvent(document.getString("event"));
         eventDto.setServiceName(document.getString("service_name"));
+        eventDto.setDate(document.getDate("date").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
         return eventDto;
     }
 }

@@ -1,6 +1,0 @@
-com\fit_goal\domain\User.class
-com\fit_goal\api\EventRegistrar.class
-com\fit_goal\api\Notificator.class
-com\fit_goal\util\Notification.class
-com\fit_goal\util\enums\Subject.class
-com\fit_goal\util\enums\Message.class

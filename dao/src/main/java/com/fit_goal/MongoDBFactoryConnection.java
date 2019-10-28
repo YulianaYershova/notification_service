@@ -1,5 +1,7 @@
 package com.fit_goal;
 
+import com.fit_goal.credentials.Credentials;
+import com.fit_goal.credentials.Seed;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;

@@ -17,6 +17,6 @@ public class EventRegistrarService implements EventRegistrar {
 
     @Override
     public void registerEvent(EventDto eventDto) {
-        eventDao.create(eventDto);
+       // eventDao.create(eventDto);
     }
 }

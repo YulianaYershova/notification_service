@@ -1,6 +1,8 @@
 package com.fit_goal.resources;
 
 import com.codahale.metrics.annotation.Timed;
+import com.fit_goal.EventDao;
+import com.fit_goal.domain.EventDto;
 import com.fit_goal.util.Notification;
 import com.fit_goal.util.enums.Message;
 import com.fit_goal.api.Notificator;
@@ -23,10 +25,12 @@ import javax.ws.rs.core.Response;
 public class NotificatorResource {
 
     private final Notificator notificator;
+    private final EventDao eventDao;
 
     @Inject
-    public NotificatorResource(Notificator notificator) {
+    public NotificatorResource(Notificator notificator, EventDao eventDao) {
         this.notificator = notificator;
+        this.eventDao = eventDao;
     }
 
     @Consumes(MediaType.APPLICATION_JSON)
@@ -34,6 +38,7 @@ public class NotificatorResource {
     @Path("/register")
     @Timed
     public Response register(@NotNull @Valid User user) {
+        eventDao.create(new EventDto());
         Notification notification = new Notification(Subject.REGISTER_SUBJECT, Message.REGISTER_MESSAGE);
         notificator.sendLink(user, notification);
         return Response.ok().build();

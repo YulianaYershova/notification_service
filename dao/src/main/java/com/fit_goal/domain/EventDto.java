@@ -1,40 +1,36 @@
 package com.fit_goal.domain;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "event")
 @Getter
 @Setter
+@Data
 @NoArgsConstructor
 public class EventDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @NotNull
-    @Column(name = "service_name")
+    private ObjectId id;
+
     private String serviceName;
 
-    @NotNull
     private String event;
 
-    @NotNull
-    private LocalDateTime time;
+    private LocalDateTime date;
 
 
-    public EventDto(@NotNull String serviceName, @NotNull String event, @NotNull LocalDateTime time) {
+    public EventDto( String serviceName,  String event, LocalDateTime date) {
         this.serviceName = serviceName;
         this.event = event;
-        this.time = time;
+        this.date = date;
     }
 
 }

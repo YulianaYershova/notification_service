@@ -1,4 +1,4 @@
-package com.fit_goal;
+package com.fit_goal.credentials;
 
 
 import lombok.Getter;
@@ -15,5 +15,4 @@ public class Seed {
 
     /** The port.*/
     private int port;
-    //getters, setters, hashcode and equals methods.
 }

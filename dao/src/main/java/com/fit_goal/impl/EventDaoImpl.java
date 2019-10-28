@@ -1,19 +1,32 @@
 package com.fit_goal.impl;
 
+import com.fit_goal.EventDao;
 import com.fit_goal.EventMapper;
 import com.fit_goal.domain.EventDto;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import org.bson.Document;
+import lombok.NonNull;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import javax.inject.Named;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.*;
 
-public class EventDaoImpl {
+public class EventDaoImpl implements EventDao {
+
+    private static final String COLLECTION_NAME = "event";
+    private static final String DATABASE = "notification_db";
+
 
     /**
      * The collection of Events
@@ -23,14 +36,17 @@ public class EventDaoImpl {
     /**
      * Constructor.
      *
-     * @param collection the collection of events.
+     * @param
      */
-    public EventDaoImpl(final MongoCollection<Document> collection) {
-        this.collection = collection;
+    @Inject
+    public EventDaoImpl(@NonNull MongoClient mongo) {
+        this.collection = mongo.getDatabase(DATABASE).getCollection(COLLECTION_NAME);
     }
 
-    public void insertOne(Document document) {
-        collection.insertOne(document);
+    @Override
+    public void create(EventDto eventDto) {
+        final Document eventDocument = new Document("service_name", "some_service").append("event", "sending verification link").append("date", LocalDateTime.now());
+        collection.insertOne(eventDocument);
     }
 
     public void insertMany(List<Document> documents) {
