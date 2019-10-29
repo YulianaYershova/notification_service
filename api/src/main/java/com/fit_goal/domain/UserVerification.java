@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class UserVerification {
 
     @NotEmpty
     @Email

@@ -1,15 +1,15 @@
 package com.fit_goal.api;
 
 
-import com.fit_goal.domain.User;
-import com.fit_goal.util.*;
+import com.fit_goal.Notification;
+import com.fit_goal.domain.UserVerification;
 
 
 public interface Notificator {
     /**
      * Sends verification link when user tries to register or reset password
      */
-    void sendLink(User user, Notification notification);
+    void sendVerificationLink(UserVerification userVerification, Notification notification);
 
     /**
      * Sends notifications to user about success operations

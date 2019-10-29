@@ -1,15 +1,22 @@
 package com.fit_goal;
 
 import com.fit_goal.domain.EventDto;
+import org.bson.Document;
+import org.bson.types.ObjectId;
+
+import java.util.List;
+import java.util.Optional;
 
 
 public interface EventDao {
 
     void create(EventDto eventDto);
 
-   /* EventDto findById(Long id);
+    Optional<EventDto>  findById(ObjectId id);
 
-    void update(EventDto eventDto);
+    List<EventDto> findAll();
 
-    void delete(EventDto eventDto);*/
+    EventDto update(EventDto eventDto);
+
+    void delete(EventDto eventDto);
 }

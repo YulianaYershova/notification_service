@@ -1,4 +1,4 @@
-package com.fit_goal.util.enums;
+package com.fit_goal.enums;
 
 public enum Message {
 

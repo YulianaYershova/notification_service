@@ -7,28 +7,16 @@ server:
       port: 9091
 
 
-#database:
-#  driverClass: org.postgresql.Driver
-#  user: postgres
-#  password: pass
-#  url: jdbc:postgresql://localhost:5432/notification_db
-
-
-
-
 #mongoDBConnection:
-#  credentials:
-#    username: "user"
-#    password: "pass"
 #  seeds:
 #    - host: "172.17.0.2"
 #      port: 27017
 #  database: ""
 
-mongoHost : "localhost"
-mongoPort : 27017
-mongoDB : notification_db
-collectionName: event
+#mongoHost : "localhost"
+#mongoPort : 27017
+#mongoDB : notification_db
+#collectionName: event
 
 #java -jar web/target/web-1.0-SNAPSHOT.jar server config.yml
 

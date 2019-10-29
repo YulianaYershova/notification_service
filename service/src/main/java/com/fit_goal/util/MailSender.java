@@ -1,12 +1,13 @@
-package com.fit_goal.impl;
+package com.fit_goal.util;
 
-import com.fit_goal.MailSender;
+import lombok.experimental.UtilityClass;
 import org.simplejavamail.email.Email;
 import org.simplejavamail.email.EmailBuilder;
 import org.simplejavamail.mailer.Mailer;
 import org.simplejavamail.mailer.MailerBuilder;
 
-public class MailSenderImpl implements MailSender {
+@UtilityClass
+public class MailSender {
 /*    private Mailer mailer;
 
 
@@ -19,7 +20,6 @@ public class MailSenderImpl implements MailSender {
         return this.mailer;
     }*/
 
-    @Override
     public void sendMail(String to, String subject, String text) {
         Mailer mailer = MailerBuilder
                 .withSMTPServer("smtp.mailtrap.io", 25, "358574e4794fb4", "2202a3db602b18").buildMailer();

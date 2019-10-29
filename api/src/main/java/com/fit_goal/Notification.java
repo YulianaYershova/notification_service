@@ -1,7 +1,7 @@
-package com.fit_goal.util;
+package com.fit_goal;
 
-import com.fit_goal.util.enums.Message;
-import com.fit_goal.util.enums.Subject;
+import com.fit_goal.enums.Message;
+import com.fit_goal.enums.Subject;
 import lombok.Getter;
 import lombok.Setter;
 
