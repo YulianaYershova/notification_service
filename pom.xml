@@ -14,6 +14,7 @@
         <module>service</module>
         <module>web</module>
         <module>dao</module>
+        <module>client</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -102,7 +103,6 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>${mainClass}</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

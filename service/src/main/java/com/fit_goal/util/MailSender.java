@@ -8,23 +8,20 @@ import org.simplejavamail.mailer.MailerBuilder;
 
 @UtilityClass
 public class MailSender {
-/*    private Mailer mailer;
 
-
-    public MailSenderService(Mailer mailer) {
-        this.mailer = mailer;
-
-    }
-
-    public Mailer getMailer() {
-        return this.mailer;
-    }*/
+    //TODO configure in config.yml
+    private final String HOST = "smtp.mailtrap.io";
+    private final int PORT = 25;
+    private final String USERNAME = "username";
+    private final String PASSWORD = "password";
+    private final String FROM_NAME = "Fit Goal";
+    private final String FROM_ADDRESS = "fitgoal@gmail.com";
 
     public void sendMail(String to, String subject, String text) {
         Mailer mailer = MailerBuilder
-                .withSMTPServer("smtp.mailtrap.io", 25, "358574e4794fb4", "2202a3db602b18").buildMailer();
+                .withSMTPServer(HOST, PORT, USERNAME, PASSWORD).buildMailer();
         Email email = EmailBuilder.startingBlank()
-                .from("Fit Goal", "fitgoal@gmail.com")
+                .from(FROM_NAME, FROM_ADDRESS)
                 .to(to)
                 .withSubject(subject)
                 .withPlainText(text)

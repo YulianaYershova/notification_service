@@ -6,18 +6,10 @@ server:
     - type: http
       port: 9091
 
-
-#mongoDBConnection:
-#  seeds:
-#    - host: "172.17.0.2"
-#      port: 27017
-#  database: ""
-
 #mongoHost : "localhost"
 #mongoPort : 27017
 #mongoDB : notification_db
 #collectionName: event
 
-#java -jar web/target/web-1.0-SNAPSHOT.jar server config.yml
 
 
