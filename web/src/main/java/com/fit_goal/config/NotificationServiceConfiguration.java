@@ -1,28 +1,32 @@
 package com.fit_goal.config;
 
+import com.fit_goal.MailerConfiguration;
+import com.fit_goal.MongoDBConfiguration;
 import io.dropwizard.Configuration;
 import lombok.Getter;
 import lombok.Setter;
-
 
 
 @Getter
 @Setter
 public class NotificationServiceConfiguration extends Configuration {
 
-   /* @JsonProperty
-    @NotEmpty
-    private String mongoHost;
+    private MailerConfiguration mailerConfiguration;
+    private MongoDBConfiguration mongoDBConfiguration;
 
-    @JsonProperty
-    private int mongoPort;
+    public MailerConfiguration getMailerConfiguration() {
+        return mailerConfiguration;
+    }
 
-    @JsonProperty
-    @NotEmpty
-    private String mongoDB;
+    public void setMailConfiguration(final MailerConfiguration mailConfiguration) {
+        this.mailerConfiguration = mailConfiguration;
+    }
 
-    @JsonProperty
-    @NotEmpty
-    private String collectionName;*/
+    public MongoDBConfiguration getMongoDBConfiguration() {
+        return mongoDBConfiguration;
+    }
 
+    public void setMongoDBConfiguration(final MongoDBConfiguration mongoDBConfiguration) {
+        this.mongoDBConfiguration = mongoDBConfiguration;
+    }
 }

@@ -1,10 +1,14 @@
 package com.fit_goal.domain;
 
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,10 +16,11 @@ import java.time.LocalDateTime;
 @Setter
 @Data
 @NoArgsConstructor
-public class EventDto {
+@AllArgsConstructor
+@Builder
+public class AuditDto {
 
-
-    private ObjectId id;
+    private String id;
 
     private String serviceName;
 
@@ -24,7 +29,7 @@ public class EventDto {
     private LocalDateTime date;
 
 
-    public EventDto( String serviceName,  String event, LocalDateTime date) {
+    public AuditDto(String serviceName, String event, LocalDateTime date) {
         this.serviceName = serviceName;
         this.event = event;
         this.date = date;

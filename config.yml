@@ -11,5 +11,18 @@ server:
 #mongoDB : notification_db
 #collectionName: event
 
+mailerConfiguration:
+  host: "smtp.mailtrap.io"
+  port: 25
+  username: "username"
+  password: "password"
+  fromName: "Fit Goal"
+  fromAddress: "fitgoal@gmail.com"
+
+mongoDBConfiguration:
+  host: "localhost"
+  port: 27017
+
+
 
 

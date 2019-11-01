@@ -2,7 +2,7 @@ package com.fit_goal.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import com.fit_goal.Notification;
-import com.fit_goal.domain.UserNotification;
+import com.fit_goal.domain.Recipient;
 import com.fit_goal.enums.Message;
 import com.fit_goal.api.Notificator;
 import com.fit_goal.domain.UserVerification;
@@ -12,7 +12,10 @@ import com.fit_goal.enums.Subject;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -32,7 +35,7 @@ public class NotificatorResource {
     @Path("/register")
     @Timed
     public Response register(@NotNull @Valid UserVerification userVerification) {
-        Notification notification = new Notification(Subject.REGISTER_SUBJECT, Message.REGISTER_MESSAGE);
+        Notification notification = new Notification(Subject.REGISTER, Message.REGISTER);
         notificator.sendVerificationLink(userVerification, notification);
         return Response.ok().build();
     }
@@ -40,9 +43,9 @@ public class NotificatorResource {
     @POST
     @Path("/register/success")
     @Timed
-    public Response registerSuccess(@NotNull @Valid UserNotification userNotification) {
-        Notification notification = new Notification(Subject.SUCCESS_REGISTRATION_SUBJECT, Message.SUCCESS_REGISTRATION_MESSAGE);
-        notificator.sendNotification(userNotification.getEmail(), notification);
+    public Response registerSuccess(@NotNull @Valid Recipient recipient) {
+        Notification notification = new Notification(Subject.SUCCESS_REGISTRATION, Message.SUCCESS_REGISTRATION);
+        notificator.sendNotification(recipient.getEmail(), notification);
         return Response.ok().build();
     }
 
@@ -50,7 +53,7 @@ public class NotificatorResource {
     @Path("/resetPassword")
     @Timed
     public Response resetPassword(@NotNull @Valid UserVerification userVerification) {
-        Notification notification = new Notification(Subject.RESET_PASSWORD_SUBJECT, Message.RESET_PASSWORD_MESSAGE);
+        Notification notification = new Notification(Subject.RESET_PASSWORD, Message.RESET_PASSWORD);
         notificator.sendVerificationLink(userVerification, notification);
         return Response.ok().build();
     }
@@ -58,9 +61,9 @@ public class NotificatorResource {
     @POST
     @Path("/resetPassword/success")
     @Timed
-    public Response resetPasswordSuccess(@NotNull @Valid UserNotification userNotification) {
-        Notification notification = new Notification(Subject.SUCCESS_RESET_PASSWORD_SUBJECT, Message.SUCCESS_RESET_PASSWORD_MESSAGE);
-        notificator.sendNotification(userNotification.getEmail(), notification);
+    public Response resetPasswordSuccess(@NotNull @Valid Recipient recipient) {
+        Notification notification = new Notification(Subject.SUCCESS_RESET_PASSWORD, Message.SUCCESS_RESET_PASSWORD);
+        notificator.sendNotification(recipient.getEmail(), notification);
         return Response.ok().build();
     }
 }
