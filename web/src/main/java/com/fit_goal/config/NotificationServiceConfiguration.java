@@ -1,25 +1,32 @@
 package com.fit_goal.config;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fit_goal.MailerConfiguration;
+import com.fit_goal.MongoDBConfiguration;
 import io.dropwizard.Configuration;
-import io.dropwizard.db.DataSourceFactory;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
 public class NotificationServiceConfiguration extends Configuration {
 
-    @Valid
-    @NotNull
-    private DataSourceFactory database = new DataSourceFactory();
+    private MailerConfiguration mailerConfiguration;
+    private MongoDBConfiguration mongoDBConfiguration;
 
-
-    @JsonProperty("database")
-    public DataSourceFactory getDataSourceFactory() {
-        return database;
+    public MailerConfiguration getMailerConfiguration() {
+        return mailerConfiguration;
     }
-    @JsonProperty("database")
-    public void setDatabase(DataSourceFactory database) {
-        this.database = database;
+
+    public void setMailConfiguration(final MailerConfiguration mailConfiguration) {
+        this.mailerConfiguration = mailConfiguration;
+    }
+
+    public MongoDBConfiguration getMongoDBConfiguration() {
+        return mongoDBConfiguration;
+    }
+
+    public void setMongoDBConfiguration(final MongoDBConfiguration mongoDBConfiguration) {
+        this.mongoDBConfiguration = mongoDBConfiguration;
     }
 }

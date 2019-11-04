@@ -1,13 +1,10 @@
 package com.fit_goal.resources;
 
 import com.codahale.metrics.annotation.Timed;
-import com.fit_goal.util.Notification;
-import com.fit_goal.util.enums.Message;
+import com.fit_goal.domain.Recipient;
+import com.fit_goal.enums.Notification;
 import com.fit_goal.api.Notificator;
-import com.fit_goal.domain.User;
-
-import com.fit_goal.util.enums.Subject;
-import io.dropwizard.hibernate.UnitOfWork;
+import com.fit_goal.domain.UserVerification;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -20,8 +17,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/notifications")
-@Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class NotificatorResource {
 
     private final Notificator notificator;
@@ -34,37 +31,32 @@ public class NotificatorResource {
     @POST
     @Path("/register")
     @Timed
-    public Response register(@NotNull @Valid User user) {
-        Notification notification = new Notification(Subject.REGISTER_SUBJECT, Message.REGISTER_MESSAGE);
-        notificator.sendLink(user, notification);
+    public Response register(@NotNull @Valid UserVerification userVerification) {
+        notificator.register(userVerification);
         return Response.ok().build();
     }
 
     @POST
     @Path("/register/success")
     @Timed
-    @UnitOfWork
-    public Response registerSuccess(@NotNull @Valid User user) {
-        Notification notification = new Notification(Subject.SUCCESS_REGISTRATION_SUBJECT, Message.SUCCESS_REGISTRATION_MESSAGE);
-        notificator.sendNotification(user.getEmail(), notification);
+    public Response registerSuccess(@NotNull @Valid Recipient recipient) {
+        notificator.registerSuccess(recipient.getEmail());
         return Response.ok().build();
     }
 
     @POST
     @Path("/resetPassword")
     @Timed
-    public Response resetPassword(@NotNull @Valid User user) {
-        Notification notification = new Notification(Subject.RESET_PASSWORD_SUBJECT, Message.RESET_PASSWORD_MESSAGE);
-        notificator.sendLink(user, notification);
+    public Response resetPassword(@NotNull @Valid UserVerification userVerification) {
+        notificator.resetPassword(userVerification);
         return Response.ok().build();
     }
 
     @POST
     @Path("/resetPassword/success")
     @Timed
-    public Response resetPasswordSuccess(@NotNull @Valid User user) {
-        Notification notification = new Notification(Subject.SUCCESS_RESET_PASSWORD_SUBJECT, Message.SUCCESS_RESET_PASSWORD_MESSAGE);
-        notificator.sendNotification(user.getEmail(), notification);
+    public Response resetPasswordSuccess(@NotNull @Valid Recipient recipient) {
+        notificator.resetPasswordSuccess(recipient.getEmail());
         return Response.ok().build();
     }
 }
