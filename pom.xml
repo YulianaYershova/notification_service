@@ -14,6 +14,7 @@
         <module>service</module>
         <module>web</module>
         <module>dao</module>
+        <module>client</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -71,6 +72,11 @@
                 <groupId>org.simplejavamail</groupId>
                 <artifactId>simple-java-mail</artifactId>
                 <version>5.5.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>4.2.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
