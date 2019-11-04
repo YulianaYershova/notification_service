@@ -64,6 +64,4 @@ public class AuditDaoImpl implements AuditDao {
     public void delete(AuditDto auditDto) {
         collection.deleteOne(eq(ID, auditDto.getId()));
     }
-
-
 }

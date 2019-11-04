@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bson.types.ObjectId;
 
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
@@ -34,5 +33,4 @@ public class AuditDto {
         this.event = event;
         this.date = date;
     }
-
 }

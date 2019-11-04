@@ -1,13 +1,10 @@
 package com.fit_goal.resources;
 
 import com.codahale.metrics.annotation.Timed;
-import com.fit_goal.Notification;
 import com.fit_goal.domain.Recipient;
-import com.fit_goal.enums.Message;
+import com.fit_goal.enums.Notification;
 import com.fit_goal.api.Notificator;
 import com.fit_goal.domain.UserVerification;
-
-import com.fit_goal.enums.Subject;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -35,8 +32,7 @@ public class NotificatorResource {
     @Path("/register")
     @Timed
     public Response register(@NotNull @Valid UserVerification userVerification) {
-        Notification notification = new Notification(Subject.REGISTER, Message.REGISTER);
-        notificator.sendVerificationLink(userVerification, notification);
+        notificator.register(userVerification);
         return Response.ok().build();
     }
 
@@ -44,8 +40,7 @@ public class NotificatorResource {
     @Path("/register/success")
     @Timed
     public Response registerSuccess(@NotNull @Valid Recipient recipient) {
-        Notification notification = new Notification(Subject.SUCCESS_REGISTRATION, Message.SUCCESS_REGISTRATION);
-        notificator.sendNotification(recipient.getEmail(), notification);
+        notificator.registerSuccess(recipient.getEmail());
         return Response.ok().build();
     }
 
@@ -53,8 +48,7 @@ public class NotificatorResource {
     @Path("/resetPassword")
     @Timed
     public Response resetPassword(@NotNull @Valid UserVerification userVerification) {
-        Notification notification = new Notification(Subject.RESET_PASSWORD, Message.RESET_PASSWORD);
-        notificator.sendVerificationLink(userVerification, notification);
+        notificator.resetPassword(userVerification);
         return Response.ok().build();
     }
 
@@ -62,8 +56,7 @@ public class NotificatorResource {
     @Path("/resetPassword/success")
     @Timed
     public Response resetPasswordSuccess(@NotNull @Valid Recipient recipient) {
-        Notification notification = new Notification(Subject.SUCCESS_RESET_PASSWORD, Message.SUCCESS_RESET_PASSWORD);
-        notificator.sendNotification(recipient.getEmail(), notification);
+        notificator.resetPasswordSuccess(recipient.getEmail());
         return Response.ok().build();
     }
 }

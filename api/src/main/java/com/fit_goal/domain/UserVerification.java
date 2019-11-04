@@ -22,5 +22,4 @@ public class UserVerification {
     @NotEmpty
     @JsonProperty
     private String verificationLink;
-
 }

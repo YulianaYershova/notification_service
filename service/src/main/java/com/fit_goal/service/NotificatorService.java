@@ -1,10 +1,10 @@
 package com.fit_goal.service;
 
 import com.fit_goal.Audit;
-import com.fit_goal.Notification;
 import com.fit_goal.api.Notificator;
 import com.fit_goal.domain.AuditDto;
 import com.fit_goal.domain.UserVerification;
+import com.fit_goal.enums.Notification;
 import com.fit_goal.util.MailSender;
 
 import javax.inject.Inject;
@@ -22,17 +22,37 @@ public class NotificatorService implements Notificator {
     }
 
     @Override
-    public void sendVerificationLink(UserVerification userVerification, Notification notification) {
+    public void register(UserVerification userVerification) {
         //TODO create method for link generating
-        String link = "user_service/verify/" + userVerification.getVerificationLink();
-        mailSender.sendMail(userVerification.getEmail(), notification.getSubject().getValue(), notification.getMessage().getValue() + link);
-        audit.create(new AuditDto("user_service", "sending verification link", LocalDateTime.now()));
+        String link = String.format("user_service/verify/%s", userVerification.getVerificationLink());
+        sendNotification(userVerification.getEmail(), Notification.REGISTER, link);
     }
 
     @Override
-    public void sendNotification(String email, Notification notification) {
-        mailSender.sendMail(email, notification.getSubject().getValue(), notification.getMessage().getValue());
+    public void registerSuccess(String email) {
+        sendNotification(email, Notification.SUCCESS_REGISTRATION);
+    }
+
+    @Override
+    public void resetPassword(UserVerification userVerification) {
+        //TODO create method for link generating
+        String link = String.format("user_service/verify/%s", userVerification.getVerificationLink());
+        sendNotification(userVerification.getEmail(), Notification.RESET_PASSWORD, link);
+    }
+
+    @Override
+    public void resetPasswordSuccess(String email) {
+        sendNotification(email, Notification.SUCCESS_RESET_PASSWORD);
+    }
+
+    private void sendNotification(String email, Notification notification) {
+        mailSender.sendMail(email, notification.getSubject(), notification.getMessage());
         audit.create(new AuditDto("user_service", "sending successful notification", LocalDateTime.now()));
     }
 
+    private void sendNotification(String email, Notification notification, String link) {
+        String message = String.format(notification.getMessage(),link);
+        mailSender.sendMail(email, notification.getSubject(), message);
+        audit.create(new AuditDto("user_service", "sending successful notification", LocalDateTime.now()));
+    }
 }
