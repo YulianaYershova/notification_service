@@ -22,9 +22,8 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class AuditDaoImpl implements AuditDao {
 
-    private static final String COLLECTION_NAME = "audit";
     private static final String DATABASE = "notification_db";
-
+    private static final String COLLECTION_NAME = "audit";
 
     private final MongoCollection<Document> collection;
 

@@ -4,8 +4,11 @@ import com.fit_goal.domain.AuditDto;
 import lombok.experimental.UtilityClass;
 import org.bson.Document;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import static com.fit_goal.AuditDtoFields.*;
 
@@ -27,6 +30,8 @@ public class AuditMongoConverter {
     }
 
     private LocalDateTime extractDate(Document document) {
-        return document.getDate(DATE).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return LocalDateTime.parse(document.getString(DATE), formatter);
+        //return document.getDate(DATE).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 }
