@@ -1,14 +1,12 @@
 package com.fit_goal.util;
 
+import com.fit_goal.AuditDtoFields;
 import com.fit_goal.domain.AuditDto;
 import lombok.experimental.UtilityClass;
 import org.bson.Document;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import static com.fit_goal.AuditDtoFields.*;
 
