@@ -1,7 +1,6 @@
 package com.fit_goal;
 
 import com.fit_goal.domain.AuditDto;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 import java.util.Optional;
