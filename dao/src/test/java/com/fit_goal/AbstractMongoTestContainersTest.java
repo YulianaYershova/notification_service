@@ -14,7 +14,6 @@ import com.github.dockerjava.api.model.Ports;
 
 import org.testcontainers.containers.GenericContainer;
 
-
 import java.util.Collections;
 import java.util.function.Consumer;
 
@@ -23,18 +22,10 @@ public abstract class AbstractMongoTestContainersTest {
     private static final int MONGO_PORT = 27017;
     private static final int MONGO_HOST_PORT = 27017;
 
-/*    private static Consumer<CreateContainerCmd> portBinding = e -> e.withPortBindings(
-            new PortBinding(
-                    Ports.Binding.bindPort(MONGO_HOST_PORT),
-                    new ExposedPort(MONGO_PORT)
-            )
-    );*/
-
-    static Consumer<CreateContainerCmd> hostConfig = e -> e.withHostConfig(
+    private static Consumer<CreateContainerCmd> hostConfig = e -> e.withHostConfig(
             HostConfig.newHostConfig().withPortBindings(
                     new PortBinding(Ports.Binding.bindPort(MONGO_HOST_PORT),
                             new ExposedPort(MONGO_PORT))).withPublishAllPorts(true));
-
 
     @ClassRule
     public static final GenericContainer mongo = new GenericContainer("mongo:" + MONGO_VERSION)

@@ -9,11 +9,5 @@ public interface AuditDao {
 
     void create(AuditDto auditDto);
 
-    Optional<AuditDto>  findById(String id);
-
     List<AuditDto> findAll();
-
-    AuditDto update(AuditDto auditDto);
-
-    void delete(AuditDto auditDto);
 }

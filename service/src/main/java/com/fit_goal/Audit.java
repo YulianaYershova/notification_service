@@ -9,12 +9,14 @@ public interface Audit {
 
     void create(AuditDto auditDto);
 
+/*
     Optional<AuditDto> findById(String id);
+*/
 
     List<AuditDto> findAll();
 
-    AuditDto update(AuditDto auditDto);
+   /* AuditDto update(AuditDto auditDto);
 
-    void delete(AuditDto auditDto);
+    void delete(AuditDto auditDto);*/
 }
 

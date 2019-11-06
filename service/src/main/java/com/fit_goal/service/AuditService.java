@@ -22,17 +22,17 @@ public class AuditService implements Audit {
         auditDao.create(auditDto);
     }
 
-    @Override
+   /* @Override
     public Optional<AuditDto> findById(String id) {
         return auditDao.findById(id);
-    }
+    }*/
 
     @Override
     public List<AuditDto> findAll() {
         return auditDao.findAll();
     }
 
-    @Override
+  /*  @Override
     public AuditDto update(AuditDto auditDto) {
         return auditDao.update(auditDto);
     }
@@ -40,5 +40,5 @@ public class AuditService implements Audit {
     @Override
     public void delete(AuditDto auditDto) {
         auditDao.delete(auditDto);
-    }
+    }*/
 }
