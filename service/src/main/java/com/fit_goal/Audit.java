@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface Audit {
+
     void create(AuditDto auditDto);
 
     Optional<AuditDto> findById(String id);

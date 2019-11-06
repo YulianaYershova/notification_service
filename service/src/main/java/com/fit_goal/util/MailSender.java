@@ -6,7 +6,6 @@ import org.simplejavamail.email.EmailBuilder;
 import org.simplejavamail.mailer.Mailer;
 import org.simplejavamail.mailer.MailerBuilder;
 
-
 public class MailSender {
 
     private final Mailer mailer;
