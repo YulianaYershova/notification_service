@@ -30,32 +30,28 @@ public class NotificatorResource {
     @POST
     @Path("/register")
     @Timed
-    public Response register(@NotNull @Valid UserVerification userVerification) {
+    public void register(@NotNull @Valid UserVerification userVerification) {
         notificationService.register(userVerification);
-        return Response.ok().build();
     }
 
     @POST
     @Path("/register/success")
     @Timed
-    public Response registerSuccess(@NotNull @Valid Recipient recipient) {
+    public void registerSuccess(@NotNull @Valid Recipient recipient) {
         notificationService.registerSuccess(recipient);
-        return Response.ok().build();
     }
 
     @POST
     @Path("/resetPassword")
     @Timed
-    public Response resetPassword(@NotNull @Valid UserVerification userVerification) {
+    public void resetPassword(@NotNull @Valid UserVerification userVerification) {
         notificationService.resetPassword(userVerification);
-        return Response.ok().build();
     }
 
     @POST
     @Path("/resetPassword/success")
     @Timed
-    public Response resetPasswordSuccess(@NotNull @Valid Recipient recipient) {
+    public void resetPasswordSuccess(@NotNull @Valid Recipient recipient) {
         notificationService.resetPasswordSuccess(recipient);
-        return Response.ok().build();
     }
 }

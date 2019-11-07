@@ -14,7 +14,6 @@ public class AuditMongoConverter {
 
     public AuditDto documentToAuditDto(Document document) {
         return AuditDto.builder()
-                .id(document.getObjectId(ID).toString())
                 .event(document.getString(EVENT))
                 .serviceName(document.getString(SERVICE_NAME))
                 .date(extractDate(document)).build();

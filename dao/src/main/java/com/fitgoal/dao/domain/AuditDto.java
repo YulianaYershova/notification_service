@@ -19,18 +19,10 @@ import java.time.LocalDateTime;
 @Builder
 public class AuditDto {
 
-    private String id;
-
     private String serviceName;
 
     private String event;
 
     private LocalDateTime date;
 
-
-    public AuditDto(String serviceName, String event, LocalDateTime date) {
-        this.serviceName = serviceName;
-        this.event = event;
-        this.date = date;
-    }
 }

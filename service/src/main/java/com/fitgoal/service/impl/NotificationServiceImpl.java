@@ -2,9 +2,9 @@ package com.fitgoal.service.impl;
 
 import com.fitgoal.api.NotificationService;
 import com.fitgoal.api.domain.Recipient;
+import com.fitgoal.dao.AuditDao;
 import com.fitgoal.dao.domain.AuditDto;
 import com.fitgoal.api.domain.UserVerification;
-import com.fitgoal.service.AuditService;
 import com.fitgoal.service.enums.Notification;
 import com.fitgoal.service.util.MailSender;
 
@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
 
 public class NotificationServiceImpl implements NotificationService {
 
-    private final AuditService auditService;
+    private final AuditDao auditDao;
     private final MailSender mailSender;
 
     @Inject
-    public NotificationServiceImpl(AuditService auditService, MailSender mailSender) {
-        this.auditService = auditService;
+    public NotificationServiceImpl(AuditDao auditDao, MailSender mailSender) {
+        this.auditDao = auditDao;
         this.mailSender = mailSender;
     }
 
@@ -30,7 +30,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void registerSuccess(Recipient recipient) {
-        sendNotification(recipient.getEmail(), Notification.SUCCESS_REGISTRATION);
+        sendSuccessfulNotification(recipient.getEmail(), Notification.SUCCESS_REGISTRATION);
     }
 
     @Override
@@ -41,10 +41,10 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void resetPasswordSuccess(Recipient recipient) {
-        sendNotification(recipient.getEmail(), Notification.SUCCESS_RESET_PASSWORD);
+        sendSuccessfulNotification(recipient.getEmail(), Notification.SUCCESS_RESET_PASSWORD);
     }
 
-    private void sendNotification(String email, Notification notification) {
+    private void sendSuccessfulNotification(String email, Notification notification) {
         mailSender.sendMail(email, notification.getSubject(), notification.getMessage());
         registerEvent("user_service", "sending successful notification");
     }
@@ -60,6 +60,6 @@ public class NotificationServiceImpl implements NotificationService {
                 .serviceName(serviceName)
                 .event(event)
                 .date(LocalDateTime.now()).build();
-        auditService.create(auditDto);
+        auditDao.create(auditDto);
     }
 }

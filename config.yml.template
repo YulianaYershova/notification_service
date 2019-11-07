@@ -1,22 +1,22 @@
 server:
   applicationConnectors:
-    - type: http
-      port: 9090
+    - type:
+      port:
   adminConnectors:
-    - type: http
-      port: 9091
+    - type:
+      port:
 
 mailerConfiguration:
-  host: "smtp.mailtrap.io"
-  port: 25
-  username: "username"
-  password: "password"
-  fromName: "Fit Goal"
-  fromAddress: "fitgoal@gmail.com"
+  host:
+  port:
+  username:
+  password:
+  fromName:
+  fromAddress:
 
 mongoDBConfiguration:
-  host: "localhost"
-  port: 27017
+  host:
+  port:
 
 
 
