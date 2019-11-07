@@ -39,7 +39,7 @@ public class NotificatorResource {
     @Path("/register/success")
     @Timed
     public Response registerSuccess(@NotNull @Valid Recipient recipient) {
-        notificationService.registerSuccess(recipient.getEmail());
+        notificationService.registerSuccess(recipient);
         return Response.ok().build();
     }
 
@@ -55,7 +55,7 @@ public class NotificatorResource {
     @Path("/resetPassword/success")
     @Timed
     public Response resetPasswordSuccess(@NotNull @Valid Recipient recipient) {
-        notificationService.resetPasswordSuccess(recipient.getEmail());
+        notificationService.resetPasswordSuccess(recipient);
         return Response.ok().build();
     }
 }

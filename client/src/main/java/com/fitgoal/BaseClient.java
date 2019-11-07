@@ -52,5 +52,4 @@ abstract class BaseClient {
         }
         return 0;
     }
-
 }
