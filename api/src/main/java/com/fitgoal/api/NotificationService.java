@@ -1,5 +1,6 @@
 package com.fitgoal.api;
 
+import com.fitgoal.api.domain.Recipient;
 import com.fitgoal.api.domain.UserVerification;
 
 public interface NotificationService {
@@ -11,7 +12,7 @@ public interface NotificationService {
     /**
      * Sends notifications to user about successful registration
      */
-    void registerSuccess(String email);
+    void registerSuccess(Recipient recipient);
 
     /**
      * Sends verification link when user tries to reset password
@@ -21,5 +22,5 @@ public interface NotificationService {
     /**
      * Sends notifications to user about successful password resetting
      */
-    void resetPasswordSuccess(String email);
+    void resetPasswordSuccess(Recipient recipient);
 }
