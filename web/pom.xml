@@ -44,7 +44,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.fit_goal.NotificationServiceApplication</mainClass>
+                            <mainClass>com.fitgoal.web.NotificationServiceApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
