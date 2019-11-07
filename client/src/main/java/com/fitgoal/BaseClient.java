@@ -26,7 +26,7 @@ abstract class BaseClient {
     }
 
     RequestBody fromEntity(Object entity) {
-        return RequestBody.create(writeValueAsString(entity),JSON_MEDIA_TYPE);
+        return RequestBody.create(writeValueAsString(entity), JSON_MEDIA_TYPE);
     }
 
     static ObjectMapper buildDefaultMapper() {
@@ -37,19 +37,20 @@ abstract class BaseClient {
         try {
             return mapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
         }
-        return null;
     }
 
-    int executeRequest(Request request) {
-        try (Response response = okHttpClient.newCall(request).execute()) {
-            ResponseBody responseBody = response.body();
-            String message = responseBody != null ? responseBody.string() : null;
+    void executeRequest(Request request) {
+        try {
+            okHttpClient.newCall(request).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        /*try (Response response = okHttpClient.newCall(request).execute()) {
             return response.code();
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return 0;
+            throw new RuntimeException(e.getMessage());
+        }*/
     }
 }
