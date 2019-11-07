@@ -25,34 +25,36 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void register(UserVerification userVerification) {
         String link = "http://localhost:9191/verify/".concat(userVerification.getVerificationLink());
-        sendVerificationLink(userVerification.getEmail(), Notification.REGISTER, link);
+        String message = Notification.REGISTER.getMessage().concat(link);
+        sendMessage(userVerification.getEmail(), Notification.SUCCESS_REGISTRATION.getSubject(), message);
     }
 
     @Override
     public void registerSuccess(Recipient recipient) {
-        sendSuccessfulNotification(recipient.getEmail(), Notification.SUCCESS_REGISTRATION);
+        String subject = Notification.SUCCESS_REGISTRATION.getSubject();
+        String message = Notification.SUCCESS_REGISTRATION.getMessage();
+        sendMessage(recipient.getEmail(), subject, message);
+        registerEvent("user_service", "sending verification link");
     }
 
     @Override
     public void resetPassword(UserVerification userVerification) {
         String link = "http://localhost:9191/verify/".concat(userVerification.getVerificationLink());
-        sendVerificationLink(userVerification.getEmail(), Notification.RESET_PASSWORD, link);
+        String message = Notification.RESET_PASSWORD.getMessage().concat(link);
+        sendMessage(userVerification.getEmail(), Notification.SUCCESS_REGISTRATION.getSubject(), message);
+        registerEvent("user_service", "sending verification link");
     }
 
     @Override
     public void resetPasswordSuccess(Recipient recipient) {
-        sendSuccessfulNotification(recipient.getEmail(), Notification.SUCCESS_RESET_PASSWORD);
-    }
-
-    private void sendSuccessfulNotification(String email, Notification notification) {
-        mailSender.sendMail(email, notification.getSubject(), notification.getMessage());
-        registerEvent("user_service", "sending successful notification");
-    }
-
-    private void sendVerificationLink(String email, Notification notification, String link) {
-        String message = notification.getMessage().concat(link);
-        mailSender.sendMail(email, notification.getSubject(), message);
+        String subject = Notification.RESET_PASSWORD.getSubject();
+        String message = Notification.RESET_PASSWORD.getMessage();
+        sendMessage(recipient.getEmail(), subject, message);
         registerEvent("user_service", "sending verification link");
+    }
+
+    private void sendMessage(String email, String subject, String message) {
+        mailSender.sendMail(email, subject, message);
     }
 
     private void registerEvent(String serviceName, String event) {
