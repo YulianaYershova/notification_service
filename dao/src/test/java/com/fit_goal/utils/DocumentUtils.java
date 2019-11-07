@@ -13,7 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.fit_goal.AuditDtoFields.DATE;
+import static com.fitgoal.dao.util.AuditDtoFields.DATE;
+
 
 @UtilityClass
 class DocumentUtils {

@@ -18,5 +18,4 @@ public class AuditDto {
     private String event;
 
     private Date date;
-
 }

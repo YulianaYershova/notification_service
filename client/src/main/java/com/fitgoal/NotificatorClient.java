@@ -1,13 +1,15 @@
-import com.fit_goal.api.Notificator;
-import com.fit_goal.domain.UserVerification;
+package com.fitgoal;
+
+import com.fitgoal.api.NotificationService;
+import com.fitgoal.api.domain.UserVerification;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class NotificatorClient extends BaseClient implements Notificator {
+public class NotificatorClient extends BaseClient implements NotificationService {
     private static final String BASE_URI = "http://localhost:9090/notifications";
 
-    NotificatorClient(OkHttpClient okHttpClient) {
+    public NotificatorClient(OkHttpClient okHttpClient) {
         super(buildDefaultMapper(), okHttpClient);
     }
 

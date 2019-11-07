@@ -9,6 +9,7 @@ import com.fitgoal.service.util.MailSender;
 
 import javax.inject.Inject;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class NotificationServiceImpl implements NotificationService {
 
@@ -45,12 +46,12 @@ public class NotificationServiceImpl implements NotificationService {
 
     private void sendNotification(String email, Notification notification) {
         mailSender.sendMail(email, notification.getSubject(), notification.getMessage());
-        auditService.create(new AuditDto("user_service", "sending successful notification", LocalDateTime.now()));
+        auditService.create(new AuditDto("user_service", "sending successful notification", new Date()));
     }
 
     private void sendNotification(String email, Notification notification, String link) {
         String message = notification.getMessage().concat(link);
         mailSender.sendMail(email, notification.getSubject(), message);
-        auditService.create(new AuditDto("user_service", "sending successful notification", LocalDateTime.now()));
+        auditService.create(new AuditDto("user_service", "sending successful notification", new Date()));
     }
 }

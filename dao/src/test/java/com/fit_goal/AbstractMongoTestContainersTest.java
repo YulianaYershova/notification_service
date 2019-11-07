@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 public abstract class AbstractMongoTestContainersTest {
     private static final String MONGO_VERSION = "4.2.1";
     private static final int MONGO_PORT = 27017;
-    private static final int MONGO_HOST_PORT = 27017;
+    private static final int MONGO_HOST_PORT = 27019;
 
     private static Consumer<CreateContainerCmd> hostConfig = e -> e.withHostConfig(
             HostConfig.newHostConfig().withPortBindings(

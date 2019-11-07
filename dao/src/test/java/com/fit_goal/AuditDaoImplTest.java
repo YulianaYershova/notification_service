@@ -1,9 +1,10 @@
 package com.fit_goal;
 
-import com.fit_goal.domain.AuditDto;
-import com.fit_goal.impl.AuditDaoImpl;
-import com.fit_goal.util.AuditMongoConverter;
 import com.fit_goal.utils.MongoTestHelper;
+import com.fitgoal.dao.AuditDao;
+import com.fitgoal.dao.domain.AuditDto;
+import com.fitgoal.dao.impl.AuditDaoImpl;
+import com.fitgoal.dao.util.AuditMongoConverter;
 import com.mongodb.client.MongoClient;
 import org.bson.Document;
 import org.junit.Before;
