@@ -1,4 +1,4 @@
-package com.fit_goal.utils;
+package com.fitgoal.dao.impl.utils;
 
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;

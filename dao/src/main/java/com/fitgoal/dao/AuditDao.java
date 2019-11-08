@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AuditDao {
 
-    void create(AuditDto auditDto);
+    AuditDto create(AuditDto auditDto);
 
     List<AuditDto> findAll();
 }

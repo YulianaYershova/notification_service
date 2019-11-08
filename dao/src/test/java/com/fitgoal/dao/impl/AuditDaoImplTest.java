@@ -1,20 +1,20 @@
-package com.fit_goal;
+package com.fitgoal.dao.impl;
 
-import com.fit_goal.utils.MongoTestHelper;
 import com.fitgoal.dao.AuditDao;
 import com.fitgoal.dao.domain.AuditDto;
-import com.fitgoal.dao.impl.AuditDaoImpl;
+import com.fitgoal.dao.impl.utils.MongoTestHelper;
 import com.fitgoal.dao.util.AuditMongoConverter;
 import com.mongodb.client.MongoClient;
 import org.bson.Document;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AuditDaoImplTest extends AbstractMongoTestContainersTest {
 
@@ -25,7 +25,7 @@ public class AuditDaoImplTest extends AbstractMongoTestContainersTest {
     private MongoTestHelper mongoTestHelper;
 
     @Before
-    public void setUp()  {
+    public void before() {
         MongoClient mongoClient = getClient();
         auditDao = new AuditDaoImpl(mongoClient);
         mongoTestHelper = new MongoTestHelper(mongoClient, DATABASE, COLLECTION_NAME);
@@ -64,7 +64,7 @@ public class AuditDaoImplTest extends AbstractMongoTestContainersTest {
         assertThat(returnedAuditDtoList).containsExactlyInAnyOrderElementsOf(AuditDtoList);
     }
 
-    private  List<AuditDto> getAuditDtoListFromDocuments(List<Document> documents) {
+    private List<AuditDto> getAuditDtoListFromDocuments(List<Document> documents) {
         return documents.stream().map(AuditMongoConverter::documentToAuditDto).collect(Collectors.toList());
     }
 

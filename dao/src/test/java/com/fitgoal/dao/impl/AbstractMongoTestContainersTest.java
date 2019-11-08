@@ -1,4 +1,4 @@
-package com.fit_goal;
+package com.fitgoal.dao.impl;
 
 import com.github.dockerjava.api.model.HostConfig;
 import com.mongodb.MongoClientSettings;
@@ -32,7 +32,7 @@ public abstract class AbstractMongoTestContainersTest {
             .withExposedPorts(MONGO_PORT)
             .withCreateContainerCmdModifier(hostConfig);
 
-    MongoClient getClient() {
+    static MongoClient getClient() {
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyToClusterSettings(builder ->
                         builder.hosts(Collections.singletonList(

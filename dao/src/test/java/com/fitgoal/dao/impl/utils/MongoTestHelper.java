@@ -1,4 +1,4 @@
-package com.fit_goal.utils;
+package com.fitgoal.dao.impl.utils;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;

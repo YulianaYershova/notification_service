@@ -28,8 +28,9 @@ public class AuditDaoImpl implements AuditDao {
     }
 
     @Override
-    public void create(AuditDto auditDto) {
+    public AuditDto create(AuditDto auditDto) {
         collection.insertOne(AuditMongoConverter.auditDtoToDocument(auditDto));
+        return auditDto;
     }
 
 
