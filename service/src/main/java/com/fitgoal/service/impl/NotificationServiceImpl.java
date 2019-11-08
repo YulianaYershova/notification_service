@@ -24,8 +24,8 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void register(UserVerification userVerification) {
-        String link = "http://localhost:9191/verify/".concat(userVerification.getVerificationLink());
-        String message = Notification.REGISTER.getMessage().concat(link);
+        String link = "http://localhost:9191/verify/" + userVerification.getVerificationLink();
+        String message = Notification.REGISTER.getMessage() + link;
         sendMessage(userVerification.getEmail(), Notification.SUCCESS_REGISTRATION.getSubject(), message);
         registerEvent("user_service", "sending verification link");
     }
@@ -40,8 +40,8 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void resetPassword(UserVerification userVerification) {
-        String link = "http://localhost:9191/verify/".concat(userVerification.getVerificationLink());
-        String message = Notification.RESET_PASSWORD.getMessage().concat(link);
+        String link = "http://localhost:9191/verify/" + userVerification.getVerificationLink();
+        String message = Notification.RESET_PASSWORD.getMessage() + link;
         sendMessage(userVerification.getEmail(), Notification.SUCCESS_REGISTRATION.getSubject(), message);
         registerEvent("user_service", "sending verification link");
     }
