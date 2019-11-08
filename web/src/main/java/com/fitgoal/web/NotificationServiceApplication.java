@@ -4,8 +4,6 @@ import com.fitgoal.dao.AuditDao;
 import com.fitgoal.dao.impl.AuditDaoImpl;
 import com.fitgoal.web.config.NotificationServiceConfiguration;
 import com.fitgoal.web.resources.NotificatorResource;
-import com.fitgoal.service.AuditService;
-import com.fitgoal.service.impl.AuditServiceImpl;
 import com.fitgoal.service.impl.NotificationServiceImpl;
 import com.fitgoal.service.util.MailSender;
 import com.fitgoal.api.NotificationService;
@@ -45,9 +43,6 @@ public class NotificationServiceApplication extends Application<NotificationServ
             protected void configure() {
                 bind(NotificationServiceImpl.class)
                         .to(NotificationService.class)
-                        .in(Singleton.class);
-                bind(AuditServiceImpl.class)
-                        .to(AuditService.class)
                         .in(Singleton.class);
                 bind(AuditDaoImpl.class)
                         .to(AuditDao.class)
