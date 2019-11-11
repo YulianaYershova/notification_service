@@ -9,13 +9,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MailerConfiguration {
+public class SenderConfiguration {
     @NotNull
-    private String host;
+    private String fromName;
     @NotNull
-    private int port;
-    @NotNull
-    private String username;
-    @NotNull
-    private String password;
+    private String fromAddress;
 }

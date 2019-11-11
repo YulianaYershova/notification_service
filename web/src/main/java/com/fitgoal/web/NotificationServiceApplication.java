@@ -7,7 +7,7 @@ import com.fitgoal.service.mail.MailSender;
 import com.fitgoal.web.config.NotificationServiceConfiguration;
 import com.fitgoal.web.resources.NotificatorResource;
 import com.fitgoal.service.impl.NotificationServiceImpl;
-import com.fitgoal.service.mail.MailSenderImpl;
+import com.fitgoal.service.mail.impl.MailSenderImpl;
 import com.fitgoal.api.NotificationService;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerAddress;
@@ -18,6 +18,8 @@ import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.glassfish.jersey.internal.inject.AbstractBinder;
+import org.simplejavamail.mailer.Mailer;
+import org.simplejavamail.mailer.MailerBuilder;
 
 import javax.inject.Singleton;
 
@@ -40,6 +42,9 @@ public class NotificationServiceApplication extends Application<NotificationServ
     @Override
     public void run(NotificationServiceConfiguration configuration, Environment environment) {
         JerseyEnvironment jersey = environment.jersey();
+
+        final Mailer mailer = configureMailer(configuration.getMailerConfiguration());
+
         jersey.register(new AbstractBinder() {
             @Override
             protected void configure() {
@@ -52,7 +57,8 @@ public class NotificationServiceApplication extends Application<NotificationServ
                 bind(MongoClients.create(getMongoClientSettings(configuration)))
                         .to(MongoClient.class)
                         .in(Singleton.class);
-                bind(configuration.getMailerConfiguration());
+                bind(configuration.getSenderConfiguration());
+                bind(mailer).to(Mailer.class);
                 bind(MailSenderImpl.class)
                         .to(MailSender.class)
                         .in(Singleton.class);
@@ -70,5 +76,14 @@ public class NotificationServiceApplication extends Application<NotificationServ
                                         configuration.getMongoDBConfiguration().getHost(),
                                         configuration.getMongoDBConfiguration().getPort()))))
                 .build();
+    }
+
+    private Mailer configureMailer(MailerConfiguration mailerConfiguration){
+        return MailerBuilder
+                .withSMTPServer(mailerConfiguration.getHost(),
+                        mailerConfiguration.getPort(),
+                        mailerConfiguration.getUsername(),
+                        mailerConfiguration.getPassword())
+                .buildMailer();
     }
 }

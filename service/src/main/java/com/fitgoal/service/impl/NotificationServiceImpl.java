@@ -7,7 +7,6 @@ import com.fitgoal.dao.domain.AuditDto;
 import com.fitgoal.api.domain.UserVerification;
 import com.fitgoal.service.enums.Notification;
 import com.fitgoal.service.mail.MailSender;
-import com.fitgoal.service.mail.MailSenderImpl;
 import org.apache.http.client.utils.URIBuilder;
 
 import javax.inject.Inject;
@@ -30,7 +29,7 @@ public class NotificationServiceImpl implements NotificationService {
     public void register(UserVerification userVerification) {
         URI uri = buildUri(userVerification.getVerificationLink());
         String message = Notification.REGISTER.getMessage() + uri;
-        sendMessage(userVerification.getEmail(), Notification.SUCCESS_REGISTRATION.getSubject(), message);
+        sendMessage(userVerification.getEmail(), Notification.REGISTER.getSubject(), message);
         registerEvent("user_service", "sending verification link");
     }
 
@@ -46,14 +45,14 @@ public class NotificationServiceImpl implements NotificationService {
     public void resetPassword(UserVerification userVerification) {
         URI uri = buildUri(userVerification.getVerificationLink());
         String message = Notification.RESET_PASSWORD.getMessage() + uri;
-        sendMessage(userVerification.getEmail(), Notification.SUCCESS_REGISTRATION.getSubject(), message);
+        sendMessage(userVerification.getEmail(), Notification.RESET_PASSWORD.getSubject(), message);
         registerEvent("user_service", "sending verification link");
     }
 
     @Override
     public void resetPasswordSuccess(Recipient recipient) {
-        String subject = Notification.RESET_PASSWORD.getSubject();
-        String message = Notification.RESET_PASSWORD.getMessage();
+        String subject = Notification.SUCCESS_RESET_PASSWORD.getSubject();
+        String message = Notification.SUCCESS_RESET_PASSWORD.getMessage();
         sendMessage(recipient.getEmail(), subject, message);
         registerEvent("user_service", "sending successful notification");
     }

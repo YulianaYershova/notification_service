@@ -5,7 +5,7 @@ import com.fitgoal.api.domain.Recipient;
 import com.fitgoal.api.domain.UserVerification;
 import com.fitgoal.dao.AuditDao;
 import com.fitgoal.dao.domain.AuditDto;
-import com.fitgoal.service.mail.MailSenderImpl;
+import com.fitgoal.service.mail.impl.MailSenderImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NotificationServiceImplTest {

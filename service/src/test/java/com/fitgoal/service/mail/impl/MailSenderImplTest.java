@@ -1,6 +1,7 @@
-package com.fitgoal.service.mail;
+package com.fitgoal.service.mail.impl;
 
-import com.fitgoal.service.config.MailerConfiguration;
+import com.fitgoal.service.config.SenderConfiguration;
+import com.fitgoal.service.mail.MailSender;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +11,10 @@ import org.simplejavamail.email.Email;
 import org.simplejavamail.email.EmailBuilder;
 import org.simplejavamail.mailer.Mailer;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class MailSenderImplTest {
@@ -18,18 +22,13 @@ public class MailSenderImplTest {
     @Mock
     private Mailer mailer;
     @Mock
-    private MailerConfiguration mailerConfiguration;
+    private SenderConfiguration senderConfiguration;
+
     private MailSender mailSender;
 
     @Before
     public void setupMailer() {
-        when(mailerConfiguration.getHost()).thenReturn("smtp.mailtrap.io");
-        when(mailerConfiguration.getPort()).thenReturn(25);
-        when(mailerConfiguration.getUsername()).thenReturn("b32aab2b4463b2");
-        when(mailerConfiguration.getPassword()).thenReturn("a351bc2793a9bf");
-        when(mailerConfiguration.getFromAddress()).thenReturn("fitgoal@gmail.com");
-        when(mailerConfiguration.getFromName()).thenReturn("Fit Goal");
-        mailSender = new MailSenderImpl(mailerConfiguration);
+        mailSender = new MailSenderImpl(mailer,senderConfiguration);
     }
 
     @Test
@@ -37,13 +36,21 @@ public class MailSenderImplTest {
         String to = "test@test.com";
         String subject = "subject";
         String text = "text";
-        mailSender.sendMail(to, subject, text);
+        String fromAddress = "gitgoal@gmail.com";
+        String fromName = "Fit Goal";
+
+        when(senderConfiguration.getFromAddress()).thenReturn(fromAddress);
+        when(senderConfiguration.getFromName()).thenReturn(fromName);
+
         Email email = EmailBuilder.startingBlank()
-                .from("fitgoal@gmail.com", "Fit Goal")
+                .from(fromName, fromAddress)
                 .to(to)
                 .withSubject(subject)
                 .withPlainText(text)
                 .buildEmail();
+
+        mailSender.sendMail(to, subject, text);
+
         verify(mailer, times(1)).sendMail(email);
     }
 }
