@@ -2,10 +2,12 @@ package com.fitgoal.web;
 
 import com.fitgoal.dao.AuditDao;
 import com.fitgoal.dao.impl.AuditDaoImpl;
+import com.fitgoal.service.config.MailerConfiguration;
+import com.fitgoal.service.mail.MailSender;
 import com.fitgoal.web.config.NotificationServiceConfiguration;
 import com.fitgoal.web.resources.NotificatorResource;
 import com.fitgoal.service.impl.NotificationServiceImpl;
-import com.fitgoal.service.util.MailSender;
+import com.fitgoal.service.mail.MailSenderImpl;
 import com.fitgoal.api.NotificationService;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerAddress;
@@ -50,7 +52,11 @@ public class NotificationServiceApplication extends Application<NotificationServ
                 bind(MongoClients.create(getMongoClientSettings(configuration)))
                         .to(MongoClient.class)
                         .in(Singleton.class);
-                bind(new MailSender(configuration.getMailerConfiguration()));
+                bind(configuration.getMailerConfiguration());
+                bind(MailSenderImpl.class)
+                        .to(MailSender.class)
+                        .in(Singleton.class);
+              //  bind(new MailSenderImpl(configuration.getMailerConfiguration()));
             }
         });
         jersey.register(NotificatorResource.class);

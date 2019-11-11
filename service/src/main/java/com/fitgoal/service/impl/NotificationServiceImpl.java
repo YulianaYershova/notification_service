@@ -6,7 +6,8 @@ import com.fitgoal.dao.AuditDao;
 import com.fitgoal.dao.domain.AuditDto;
 import com.fitgoal.api.domain.UserVerification;
 import com.fitgoal.service.enums.Notification;
-import com.fitgoal.service.util.MailSender;
+import com.fitgoal.service.mail.MailSender;
+import com.fitgoal.service.mail.MailSenderImpl;
 import org.apache.http.client.utils.URIBuilder;
 
 import javax.inject.Inject;

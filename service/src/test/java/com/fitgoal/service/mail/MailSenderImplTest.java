@@ -1,4 +1,4 @@
-package com.fitgoal.service.util;
+package com.fitgoal.service.mail;
 
 import com.fitgoal.service.config.MailerConfiguration;
 import org.junit.Before;
@@ -6,15 +6,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.simplejavamail.email.Email;
+import org.simplejavamail.email.EmailBuilder;
+import org.simplejavamail.mailer.Mailer;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MailSenderTest {
+public class MailSenderImplTest {
 
-    private MailSender mailSender;
+    @Mock
+    private Mailer mailer;
     @Mock
     private MailerConfiguration mailerConfiguration;
+    private MailSender mailSender;
 
     @Before
     public void setupMailer() {
@@ -24,11 +29,21 @@ public class MailSenderTest {
         when(mailerConfiguration.getPassword()).thenReturn("a351bc2793a9bf");
         when(mailerConfiguration.getFromAddress()).thenReturn("fitgoal@gmail.com");
         when(mailerConfiguration.getFromName()).thenReturn("Fit Goal");
-        mailSender = new MailSender(mailerConfiguration);
+        mailSender = new MailSenderImpl(mailerConfiguration);
     }
 
     @Test
     public void sendMailTest() {
-        mailSender.sendMail("test@test.com", "subject", "text");
+        String to = "test@test.com";
+        String subject = "subject";
+        String text = "text";
+        mailSender.sendMail(to, subject, text);
+        Email email = EmailBuilder.startingBlank()
+                .from("fitgoal@gmail.com", "Fit Goal")
+                .to(to)
+                .withSubject(subject)
+                .withPlainText(text)
+                .buildEmail();
+        verify(mailer, times(1)).sendMail(email);
     }
 }
