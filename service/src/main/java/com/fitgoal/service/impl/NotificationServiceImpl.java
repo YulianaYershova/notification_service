@@ -7,8 +7,11 @@ import com.fitgoal.dao.domain.AuditDto;
 import com.fitgoal.api.domain.UserVerification;
 import com.fitgoal.service.enums.Notification;
 import com.fitgoal.service.util.MailSender;
+import org.apache.http.client.utils.URIBuilder;
 
 import javax.inject.Inject;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 
 public class NotificationServiceImpl implements NotificationService {
@@ -24,8 +27,8 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void register(UserVerification userVerification) {
-        String link = "http://localhost:9191/verify/" + userVerification.getVerificationLink();
-        String message = Notification.REGISTER.getMessage() + link;
+        URI uri = buildUri(userVerification.getVerificationLink());
+        String message = Notification.REGISTER.getMessage() + uri;
         sendMessage(userVerification.getEmail(), Notification.SUCCESS_REGISTRATION.getSubject(), message);
         registerEvent("user_service", "sending verification link");
     }
@@ -40,8 +43,8 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void resetPassword(UserVerification userVerification) {
-        String link = "http://localhost:9191/verify/" + userVerification.getVerificationLink();
-        String message = Notification.RESET_PASSWORD.getMessage() + link;
+        URI uri = buildUri(userVerification.getVerificationLink());
+        String message = Notification.RESET_PASSWORD.getMessage() + uri;
         sendMessage(userVerification.getEmail(), Notification.SUCCESS_REGISTRATION.getSubject(), message);
         registerEvent("user_service", "sending verification link");
     }
@@ -64,5 +67,18 @@ public class NotificationServiceImpl implements NotificationService {
                 .event(event)
                 .date(new Date()).build();
         auditDao.create(auditDto);
+    }
+
+    private URI buildUri(String verificationLink) {
+        try {
+            return new URIBuilder()
+                    .setScheme("http")
+                    .setHost("localhost")
+                    .setPort(9191)
+                    .setPathSegments("verify", verificationLink).build();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 }
