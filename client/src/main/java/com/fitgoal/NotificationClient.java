@@ -10,6 +10,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * OkHttp HTTP client implementation of {@link NotificationService} API.
+ */
 public class NotificationClient extends BaseClient implements NotificationService {
 
     private static final String REGISTER = "register";
