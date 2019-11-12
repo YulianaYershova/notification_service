@@ -13,8 +13,6 @@ import org.simplejavamail.mailer.Mailer;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
-
 
 @RunWith(MockitoJUnitRunner.class)
 public class MailSenderImplTest {
@@ -51,6 +49,6 @@ public class MailSenderImplTest {
 
         mailSender.sendMail(to, subject, text);
 
-        verify(mailer, times(1)).sendMail(email);
+        verify(mailer).sendMail(email);
     }
 }

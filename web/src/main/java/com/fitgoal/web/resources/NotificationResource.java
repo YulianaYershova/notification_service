@@ -17,12 +17,12 @@ import javax.ws.rs.core.MediaType;
 @Path("/notifications")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class NotificatorResource {
+public class NotificationResource {
 
     private final NotificationService notificationService;
 
     @Inject
-    public NotificatorResource(NotificationService notificationService) {
+    public NotificationResource(NotificationService notificationService) {
         this.notificationService = notificationService;
     }
 
