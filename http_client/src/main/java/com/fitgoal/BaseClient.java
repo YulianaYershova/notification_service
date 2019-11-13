@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.util.Arrays;
 
-import static java.net.HttpURLConnection.*;
+import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 
 abstract class BaseClient {
 
