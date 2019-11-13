@@ -1,0 +1,23 @@
+server:
+  applicationConnectors:
+    - type:
+      port:
+  adminConnectors:
+    - type:
+      port:
+
+mailerConfiguration:
+  host:
+  port:
+  username:
+  password:
+  fromName:
+  fromAddress:
+
+mongoDBConfiguration:
+  host:
+  port:
+
+
+
+
