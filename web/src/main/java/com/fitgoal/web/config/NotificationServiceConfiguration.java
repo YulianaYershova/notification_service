@@ -15,27 +15,4 @@ public class NotificationServiceConfiguration extends Configuration {
     private MongoDBConfiguration mongoDBConfiguration;
     private SenderConfiguration senderConfiguration;
 
-
-    public MailerConfiguration getMailerConfiguration() {
-        return mailerConfiguration;
-    }
-
-    public void setMailConfiguration(final MailerConfiguration mailConfiguration) {
-        this.mailerConfiguration = mailConfiguration;
-    }
-
-    public MongoDBConfiguration getMongoDBConfiguration() {
-        return mongoDBConfiguration;
-    }
-
-    public void setMongoDBConfiguration(final MongoDBConfiguration mongoDBConfiguration) {
-        this.mongoDBConfiguration = mongoDBConfiguration;
-    }
-    public SenderConfiguration getSenderConfiguration() {
-        return senderConfiguration;
-    }
-
-    public void setSenderConfiguration(final SenderConfiguration senderConfiguration) {
-        this.senderConfiguration = senderConfiguration;
-    }
 }
