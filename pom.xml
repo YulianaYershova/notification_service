@@ -6,7 +6,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.fit_foal</groupId>
+    <groupId>com.fit_goal</groupId>
     <artifactId>notification_service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
@@ -37,22 +37,22 @@
                 <version>${dropwizard.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.fit_foal</groupId>
+                <groupId>com.fit_goal</groupId>
                 <artifactId>api</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.fit_foal</groupId>
+                <groupId>com.fit_goal</groupId>
                 <artifactId>dao</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.fit_foal</groupId>
+                <groupId>com.fit_goal</groupId>
                 <artifactId>service</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.fit_foal</groupId>
+                <groupId>com.fit_goal</groupId>
                 <artifactId>web</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
