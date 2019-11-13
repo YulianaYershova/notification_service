@@ -14,7 +14,7 @@
         <module>service</module>
         <module>web</module>
         <module>dao</module>
-        <module>http_client</module>
+        <module>http-client</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -15,12 +15,12 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.util.Arrays;
 
-import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
+import static org.eclipse.jetty.http.HttpStatus.BAD_REQUEST_400;
+import static org.eclipse.jetty.http.HttpStatus.UNPROCESSABLE_ENTITY_422;
 
 abstract class BaseClient {
 
     private static final MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json; charset=utf-8");
-    private static final int UNPROCESSABLE_ENTITY_STATUS_CODE = 422;
     private final OkHttpClient okHttpClient;
     private final ObjectMapper mapper;
     private final HttpUrl resourceUrl;
@@ -66,8 +66,8 @@ abstract class BaseClient {
             ResponseBody responseBody = response.body();
             String message = responseBody != null ? responseBody.string() : null;
             switch (response.code()) {
-                case HTTP_BAD_REQUEST:
-                case UNPROCESSABLE_ENTITY_STATUS_CODE:
+                case BAD_REQUEST_400:
+                case UNPROCESSABLE_ENTITY_422:
                     return new IllegalArgumentException(message);
                 default:
                     return new RuntimeException(message);
