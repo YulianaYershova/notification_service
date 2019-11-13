@@ -11,12 +11,14 @@ mailerConfiguration:
   port:
   username:
   password:
+
+senderConfiguration:
   fromName:
   fromAddress:
 
 mongoDBConfiguration:
   host:
-  port:
+  port: 
 
 
 
