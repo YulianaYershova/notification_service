@@ -6,7 +6,7 @@ import com.fitgoal.service.config.MailerConfiguration;
 import com.fitgoal.service.mail.MailSender;
 import com.fitgoal.service.mail.impl.MailSenderImpl;
 import com.fitgoal.web.config.NotificationServiceConfiguration;
-import com.fitgoal.web.resources.NotificatorResource;
+import com.fitgoal.web.resources.NotificationResource;
 import com.fitgoal.service.impl.NotificationServiceImpl;
 import com.fitgoal.api.NotificationService;
 import com.mongodb.MongoClientSettings;
@@ -65,7 +65,7 @@ public class NotificationServiceApplication extends Application<NotificationServ
                         .in(Singleton.class);
             }
         });
-        jersey.register(NotificatorResource.class);
+        jersey.register(NotificationResource.class);
     }
 
     private MongoClientSettings getMongoClientSettings(NotificationServiceConfiguration configuration) {
