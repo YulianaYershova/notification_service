@@ -4,8 +4,7 @@ import com.fitgoal.dao.domain.AuditDto;
 import lombok.experimental.UtilityClass;
 import org.bson.Document;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.util.Date;
 
 import static com.fitgoal.dao.util.AuditDtoFields.*;
 
@@ -25,7 +24,7 @@ public class AuditMongoConverter {
                 .append(DATE, auditDto.getDate());
     }
 
-    private LocalDateTime extractDate(Document document) {
-        return document.getDate(DATE).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    private Date extractDate(Document document) {
+        return document.getDate(DATE);
     }
 }

@@ -10,6 +10,7 @@ import com.fitgoal.service.util.MailSender;
 
 import javax.inject.Inject;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class NotificationServiceImpl implements NotificationService {
 
@@ -62,7 +63,7 @@ public class NotificationServiceImpl implements NotificationService {
         AuditDto auditDto = AuditDto.builder()
                 .serviceName(serviceName)
                 .event(event)
-                .date(LocalDateTime.now()).build();
+                .date(new Date()).build();
         auditDao.create(auditDto);
     }
 }
