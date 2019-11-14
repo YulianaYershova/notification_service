@@ -20,7 +20,9 @@ public class MongoTestHelper {
     private final MongoCollection<Document> collection;
 
     public MongoTestHelper(@NotNull MongoClient mongo, @NotNull String database, @NotNull String collectionName) {
-        this.collection = mongo.getDatabase(database).getCollection(collectionName);
+        this.collection = mongo
+                .getDatabase(database)
+                .getCollection(collectionName);
     }
 
     public void deleteAll() {

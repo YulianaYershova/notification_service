@@ -35,6 +35,9 @@ public class AuditDaoImpl implements AuditDao {
     @Override
     public List<AuditDto> findAll() {
         Spliterator<Document> mongoCursor = collection.find().spliterator();
-        return StreamSupport.stream(mongoCursor, false) .map(AuditMongoConverter::documentToAuditDto) .collect(Collectors.toList());
+        return StreamSupport
+                .stream(mongoCursor, false)
+                .map(AuditMongoConverter::documentToAuditDto)
+                .collect(Collectors.toList());
     }
 }

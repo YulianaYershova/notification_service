@@ -29,7 +29,10 @@ class DocumentUtils {
 
             Object content = Document.parse("{\"json\":" + docJson + "}").get("json");
             List<Document> documents = (List<Document>) content;
-            return documents.stream().map(DocumentUtils::convertDateFromString).collect(Collectors.toList());
+            return documents
+                    .stream()
+                    .map(DocumentUtils::convertDateFromString)
+                    .collect(Collectors.toList());
         } catch (IOException  ex) {
             throw new RuntimeException("Can't handle resource: " + resourceName, ex);
         }
