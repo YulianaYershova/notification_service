@@ -12,7 +12,7 @@ import org.apache.http.client.utils.URIBuilder;
 import javax.inject.Inject;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class NotificationServiceImpl implements NotificationService {
 
@@ -65,7 +65,7 @@ public class NotificationServiceImpl implements NotificationService {
         AuditDto auditDto = AuditDto.builder()
                 .serviceName(serviceName)
                 .event(event)
-                .date(new Date()).build();
+                .date(LocalDateTime.now()).build();
         auditDao.create(auditDto);
     }
     private URI buildUri(String verificationLink) {
@@ -76,8 +76,7 @@ public class NotificationServiceImpl implements NotificationService {
                     .setPort(9191)
                     .setPathSegments("verify", verificationLink).build();
         } catch (URISyntaxException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 }

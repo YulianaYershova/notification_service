@@ -9,15 +9,20 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.fitgoal.dao.util.AuditDtoFields.DATE;
 
-
 @UtilityClass
 class DocumentUtils {
+
+    private static final  SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     List<Document> parseDocuments(@NonNull String resourceName) {
         try {
             String docJson = IOUtils.resourceToString(resourceName, StandardCharsets.UTF_8);
@@ -31,10 +36,13 @@ class DocumentUtils {
     }
 
     private Document convertDateFromString(Document document) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = null;
+        LocalDateTime date = null;
         try {
-            date = format.parse(document.getString(DATE));
+            date = SIMPLE_DATE_FORMAT
+                    .parse(document.getString(DATE))
+                    .toInstant()
+                    .atZone(ZoneOffset.UTC)
+                    .toLocalDateTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }

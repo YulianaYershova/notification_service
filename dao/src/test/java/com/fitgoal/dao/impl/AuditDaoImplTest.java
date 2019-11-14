@@ -3,15 +3,13 @@ package com.fitgoal.dao.impl;
 import com.fitgoal.dao.AuditDao;
 import com.fitgoal.dao.domain.AuditDto;
 import com.fitgoal.dao.impl.utils.MongoTestHelper;
-import com.fitgoal.dao.util.AuditMongoConverter;
 import com.mongodb.client.MongoClient;
-import org.bson.Document;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,8 +31,7 @@ public class AuditDaoImplTest extends AbstractMongoTestContainersTest {
 
     @Test
     public void createTest() {
-        List<Document> documentList = mongoTestHelper.allDocuments();
-        assertThat(documentList).isEmpty();
+        assertThat(mongoTestHelper.allData()).isEmpty();
 
         AuditDto auditDto = createAuditDto();
 
@@ -52,10 +49,7 @@ public class AuditDaoImplTest extends AbstractMongoTestContainersTest {
         mongoTestHelper.importDocuments("/audit.json");
 
         // obtain saved data
-        List<Document> importedDocuments = mongoTestHelper.allDocuments();
-
-        // Convert documents to AuditDto objects
-        List<AuditDto> AuditDtoList = getAuditDtoListFromDocuments(importedDocuments);
+        List<AuditDto> AuditDtoList = mongoTestHelper.allData();
 
         // load data from test DB
         List<AuditDto> returnedAuditDtoList = auditDao.findAll();
@@ -63,14 +57,10 @@ public class AuditDaoImplTest extends AbstractMongoTestContainersTest {
         assertThat(returnedAuditDtoList).containsExactlyInAnyOrderElementsOf(AuditDtoList);
     }
 
-    private List<AuditDto> getAuditDtoListFromDocuments(List<Document> documents) {
-        return documents.stream().map(AuditMongoConverter::documentToAuditDto).collect(Collectors.toList());
-    }
-
     private AuditDto createAuditDto() {
         return AuditDto.builder()
                 .event("event")
                 .serviceName("service")
-                .date(new Date()).build();
+                .date(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)).build();
     }
 }

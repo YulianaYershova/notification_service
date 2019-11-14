@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -19,6 +19,6 @@ public class AuditDto {
 
     private String event;
 
-    private Date date;
+    private LocalDateTime date;
 
 }

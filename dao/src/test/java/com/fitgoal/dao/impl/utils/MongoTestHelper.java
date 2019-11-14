@@ -1,5 +1,7 @@
 package com.fitgoal.dao.impl.utils;
 
+import com.fitgoal.dao.domain.AuditDto;
+import com.fitgoal.dao.util.AuditMongoConverter;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import lombok.NonNull;
@@ -9,6 +11,7 @@ import org.bson.Document;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class MongoTestHelper {
@@ -16,8 +19,8 @@ public class MongoTestHelper {
     @NonNull
     private final MongoCollection<Document> collection;
 
-    public MongoTestHelper(@NotNull MongoClient mongo, @NotNull String database, @NotNull String collection_name) {
-        this.collection = mongo.getDatabase(database).getCollection(collection_name);
+    public MongoTestHelper(@NotNull MongoClient mongo, @NotNull String database, @NotNull String collectionName) {
+        this.collection = mongo.getDatabase(database).getCollection(collectionName);
     }
 
     public void deleteAll() {
@@ -32,9 +35,12 @@ public class MongoTestHelper {
         collection.insertMany(documents);
     }
 
-    public List<Document> allDocuments() {
+    public List<AuditDto> allData() {
         return collection
                 .find()
-                .into(new ArrayList<>());
+                .into(new ArrayList<>())
+                .stream()
+                .map(AuditMongoConverter::documentToAuditDto)
+                .collect(Collectors.toList());
     }
 }

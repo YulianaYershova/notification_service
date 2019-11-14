@@ -5,7 +5,6 @@ import com.fitgoal.api.domain.Recipient;
 import com.fitgoal.api.domain.UserVerification;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import io.dropwizard.testing.junit5.ResourceExtension;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +16,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
@@ -26,18 +24,13 @@ public class NotificationResourceTest {
     private static final String RESOURCE_PATH = "/notifications";
     private static final NotificationService notificationService = mock(NotificationService.class);
 
-    private static final ResourceExtension resource = ResourceExtension.builder()
+    private final ResourceExtension resource = ResourceExtension.builder()
             .addResource(new NotificationResource(notificationService))
             .build();
 
     @Before
     public void setUp() throws Throwable {
         resource.before();
-    }
-
-    @After
-    public void tearDown() throws Throwable {
-        resource.after();
     }
 
     @Test

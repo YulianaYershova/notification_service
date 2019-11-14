@@ -7,18 +7,13 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import lombok.NonNull;
-import org.bson.types.ObjectId;
 
 import javax.inject.Inject;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Spliterator;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import static com.fitgoal.dao.util.AuditDtoFields.*;
-import static com.mongodb.client.model.Filters.eq;
 
 public class AuditDaoImpl implements AuditDao {
 

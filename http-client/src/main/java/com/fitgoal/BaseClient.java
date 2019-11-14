@@ -47,7 +47,7 @@ abstract class BaseClient {
         try {
             return mapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
@@ -57,7 +57,7 @@ abstract class BaseClient {
                 throw convertException(response);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
