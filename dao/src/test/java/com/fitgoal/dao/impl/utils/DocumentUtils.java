@@ -11,8 +11,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +19,7 @@ import static com.fitgoal.dao.util.AuditDtoFields.DATE;
 @UtilityClass
 class DocumentUtils {
 
-    private static final  SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     List<Document> parseDocuments(@NonNull String resourceName) {
         try {
@@ -31,24 +29,29 @@ class DocumentUtils {
             List<Document> documents = (List<Document>) content;
             return documents
                     .stream()
-                    .map(DocumentUtils::convertDateFromString)
+                    .map(document -> fixDate(
+                            document, convertDate(document.getString(DATE))))
                     .collect(Collectors.toList());
-        } catch (IOException  ex) {
+        } catch (IOException ex) {
             throw new RuntimeException("Can't handle resource: " + resourceName, ex);
         }
     }
 
-    private Document convertDateFromString(Document document) {
-        LocalDateTime date = null;
+    private LocalDateTime convertDate(String date) {
+        LocalDateTime localDateTime = null;
         try {
-            date = SIMPLE_DATE_FORMAT
-                    .parse(document.getString(DATE))
+            localDateTime = SIMPLE_DATE_FORMAT
+                    .parse(date)
                     .toInstant()
                     .atZone(ZoneOffset.UTC)
                     .toLocalDateTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return localDateTime;
+    }
+
+    private Document fixDate(Document document, LocalDateTime date) {
         document.put(DATE, date);
         return document;
     }
