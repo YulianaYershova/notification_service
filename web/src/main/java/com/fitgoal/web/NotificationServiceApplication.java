@@ -49,6 +49,7 @@ public class NotificationServiceApplication extends Application<NotificationServ
         jersey.register(new AbstractBinder() {
             @Override
             protected void configure() {
+                bind(configuration.getUserServiceConfiguration());
                 bind(NotificationServiceImpl.class)
                         .to(NotificationService.class)
                         .in(Singleton.class);

@@ -1,16 +1,16 @@
 package com.fitgoal.service.impl;
 
-import com.fitgoal.api.NotificationService;
 import com.fitgoal.api.domain.Recipient;
 import com.fitgoal.api.domain.UserVerification;
 import com.fitgoal.dao.AuditDao;
 import com.fitgoal.dao.domain.AuditDto;
+import com.fitgoal.service.config.UserServiceConfiguration;
 import com.fitgoal.service.impl.utils.TestHelper;
 import com.fitgoal.service.mail.impl.MailSenderImpl;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -24,18 +24,15 @@ public class NotificationServiceImplTest {
     private AuditDao auditDao;
     @Mock
     private MailSenderImpl mailSenderImpl;
-
-    private NotificationService notificationService;
-
-    @Before
-    public void setNotificationService() {
-        notificationService = new NotificationServiceImpl(auditDao, mailSenderImpl);
-    }
+    @Mock
+    private UserServiceConfiguration userServiceConfiguration;
+    @InjectMocks
+    private NotificationServiceImpl notificationServiceImpl;
 
     @Test
     public void registerTest() {
         UserVerification userVerification = TestHelper.buildUserVerification();
-        notificationService.register(userVerification);
+        notificationServiceImpl.register(userVerification);
         verify(mailSenderImpl).sendMail(Mockito.anyString(), Mockito.anyString(), Mockito.anyString());
         verify(auditDao).create(ArgumentMatchers.any(AuditDto.class));
     }
@@ -43,7 +40,7 @@ public class NotificationServiceImplTest {
     @Test
     public void registerSuccessTest() {
         Recipient recipient = TestHelper.buildRecipient();
-        notificationService.registerSuccess(recipient);
+        notificationServiceImpl.registerSuccess(recipient);
         verify(mailSenderImpl).sendMail(Mockito.anyString(), Mockito.anyString(), Mockito.anyString());
         verify(auditDao).create(ArgumentMatchers.any(AuditDto.class));
     }
@@ -51,7 +48,7 @@ public class NotificationServiceImplTest {
     @Test
     public void resetPasswordTest() {
         UserVerification userVerification = TestHelper.buildUserVerification();
-        notificationService.resetPassword(userVerification);
+        notificationServiceImpl.resetPassword(userVerification);
         verify(mailSenderImpl).sendMail(Mockito.anyString(), Mockito.anyString(), Mockito.anyString());
         verify(auditDao).create(ArgumentMatchers.any(AuditDto.class));
     }
@@ -59,7 +56,7 @@ public class NotificationServiceImplTest {
     @Test
     public void resetPasswordSuccessTest() {
         Recipient recipient = TestHelper.buildRecipient();
-        notificationService.resetPasswordSuccess(recipient);
+        notificationServiceImpl.resetPasswordSuccess(recipient);
         verify(mailSenderImpl).sendMail(Mockito.anyString(), Mockito.anyString(), Mockito.anyString());
         verify(auditDao).create(ArgumentMatchers.any(AuditDto.class));
     }

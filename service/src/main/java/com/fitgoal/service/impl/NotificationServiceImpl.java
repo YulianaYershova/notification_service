@@ -5,6 +5,7 @@ import com.fitgoal.api.domain.Recipient;
 import com.fitgoal.dao.AuditDao;
 import com.fitgoal.dao.domain.AuditDto;
 import com.fitgoal.api.domain.UserVerification;
+import com.fitgoal.service.config.UserServiceConfiguration;
 import com.fitgoal.service.enums.Notification;
 import com.fitgoal.service.mail.MailSender;
 import org.apache.http.client.utils.URIBuilder;
@@ -18,11 +19,13 @@ public class NotificationServiceImpl implements NotificationService {
 
     private final AuditDao auditDao;
     private final MailSender mailSender;
+    private final UserServiceConfiguration userServiceConfiguration;
 
     @Inject
-    public NotificationServiceImpl(AuditDao auditDao, MailSender mailSender) {
+    public NotificationServiceImpl(AuditDao auditDao, MailSender mailSender, UserServiceConfiguration userServiceConfiguration) {
         this.auditDao = auditDao;
         this.mailSender = mailSender;
+        this.userServiceConfiguration = userServiceConfiguration;
     }
 
     @Override
@@ -68,12 +71,13 @@ public class NotificationServiceImpl implements NotificationService {
                 .date(LocalDateTime.now()).build();
         auditDao.create(auditDto);
     }
+
     private URI buildUri(String verificationLink) {
         try {
             return new URIBuilder()
-                    .setScheme("http")
-                    .setHost("localhost")
-                    .setPort(9191)
+                    .setScheme(userServiceConfiguration.getScheme())
+                    .setHost(userServiceConfiguration.getHost())
+                    .setPort(userServiceConfiguration.getPort())
                     .setPathSegments("verify", verificationLink).build();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);

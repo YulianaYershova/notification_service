@@ -1,10 +1,9 @@
 package com.fitgoal.service.mail.impl;
 
 import com.fitgoal.service.config.SenderConfiguration;
-import com.fitgoal.service.mail.MailSender;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.simplejavamail.email.Email;
@@ -21,13 +20,8 @@ public class MailSenderImplTest {
     private Mailer mailer;
     @Mock
     private SenderConfiguration senderConfiguration;
-
-    private MailSender mailSender;
-
-    @Before
-    public void setupMailer() {
-        mailSender = new MailSenderImpl(mailer,senderConfiguration);
-    }
+    @InjectMocks
+    private MailSenderImpl mailSenderImpl;
 
     @Test
     public void sendMailTest() {
@@ -47,7 +41,7 @@ public class MailSenderImplTest {
                 .withPlainText(text)
                 .buildEmail();
 
-        mailSender.sendMail(to, subject, text);
+        mailSenderImpl.sendMail(to, subject, text);
 
         verify(mailer).sendMail(email);
     }
