@@ -11,6 +11,8 @@ mailerConfiguration:
   port:
   username:
   password:
+
+senderConfiguration:
   fromName:
   fromAddress:
 

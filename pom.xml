@@ -6,7 +6,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.fit_foal</groupId>
+    <groupId>com.fit_goal</groupId>
     <artifactId>notification_service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
@@ -14,6 +14,7 @@
         <module>service</module>
         <module>web</module>
         <module>dao</module>
+        <module>http-client</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -36,22 +37,22 @@
                 <version>${dropwizard.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.fit_foal</groupId>
+                <groupId>com.fit_goal</groupId>
                 <artifactId>api</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.fit_foal</groupId>
+                <groupId>com.fit_goal</groupId>
                 <artifactId>dao</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.fit_foal</groupId>
+                <groupId>com.fit_goal</groupId>
                 <artifactId>service</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.fit_foal</groupId>
+                <groupId>com.fit_goal</groupId>
                 <artifactId>web</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
@@ -71,9 +72,61 @@
                 <version>${dropwizard.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>4.2.2</version>
+            </dependency>
+            <dependency>
                 <groupId>org.simplejavamail</groupId>
                 <artifactId>simple-java-mail</artifactId>
                 <version>5.5.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.5.10</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.13-rc-1</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers</artifactId>
+                <version>1.12.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>3.14.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>3.1.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.dropwizard</groupId>
+                <artifactId>dropwizard-testing</artifactId>
+                <version>2.0.0-rc12</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.6.0-M1</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>mockwebserver</artifactId>
+                <version>4.2.2</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -153,6 +206,30 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- attached to Maven test phase -->
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>target/jacoco.exec</dataFile>
+                            <outputDirectory>target/jacoco-report</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

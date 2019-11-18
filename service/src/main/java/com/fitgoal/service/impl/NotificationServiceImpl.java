@@ -5,27 +5,33 @@ import com.fitgoal.api.domain.Recipient;
 import com.fitgoal.dao.AuditDao;
 import com.fitgoal.dao.domain.AuditDto;
 import com.fitgoal.api.domain.UserVerification;
+import com.fitgoal.service.config.UserServiceConfiguration;
 import com.fitgoal.service.enums.Notification;
-import com.fitgoal.service.util.MailSender;
+import com.fitgoal.service.mail.MailSender;
+import org.apache.http.client.utils.URIBuilder;
 
 import javax.inject.Inject;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 
 public class NotificationServiceImpl implements NotificationService {
 
     private final AuditDao auditDao;
     private final MailSender mailSender;
+    private final UserServiceConfiguration userServiceConfiguration;
 
     @Inject
-    public NotificationServiceImpl(AuditDao auditDao, MailSender mailSender) {
+    public NotificationServiceImpl(AuditDao auditDao, MailSender mailSender, UserServiceConfiguration userServiceConfiguration) {
         this.auditDao = auditDao;
         this.mailSender = mailSender;
+        this.userServiceConfiguration = userServiceConfiguration;
     }
 
     @Override
     public void register(UserVerification userVerification) {
-        String link = "http://localhost:9191/verify/" + userVerification.getVerificationLink();
-        String message = Notification.REGISTER.getMessage() + link;
+        URI uri = buildUri(userVerification.getVerificationLink());
+        String message = Notification.REGISTER.getMessage() + uri;
         sendMessage(userVerification.getEmail(), Notification.REGISTER.getSubject(), message);
         registerEvent("user_service", "sending verification link");
     }
@@ -40,8 +46,8 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void resetPassword(UserVerification userVerification) {
-        String link = "http://localhost:9191/verify/" + userVerification.getVerificationLink();
-        String message = Notification.RESET_PASSWORD.getMessage() + link;
+        URI uri = buildUri(userVerification.getVerificationLink());
+        String message = Notification.RESET_PASSWORD.getMessage() + uri;
         sendMessage(userVerification.getEmail(), Notification.RESET_PASSWORD.getSubject(), message);
         registerEvent("user_service", "sending verification link");
     }
@@ -64,5 +70,17 @@ public class NotificationServiceImpl implements NotificationService {
                 .event(event)
                 .date(LocalDateTime.now()).build();
         auditDao.create(auditDto);
+    }
+
+    private URI buildUri(String verificationLink) {
+        try {
+            return new URIBuilder()
+                    .setScheme(userServiceConfiguration.getScheme())
+                    .setHost(userServiceConfiguration.getHost())
+                    .setPort(userServiceConfiguration.getPort())
+                    .setPathSegments("verify", verificationLink).build();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
