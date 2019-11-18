@@ -16,6 +16,11 @@ senderConfiguration:
   fromName:
   fromAddress:
 
+userServiceConfiguration:
+  scheme:
+  host:
+  port:
+
 mongoDBConfiguration:
   host:
   port:
