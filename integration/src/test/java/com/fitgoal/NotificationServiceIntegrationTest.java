@@ -66,7 +66,7 @@ public class NotificationServiceIntegrationTest extends AbstractIntegrationTest 
     }
 
     @Test
-    public void resetPasswordTest() throws InterruptedException {
+    public void resetPasswordTest() {
         UserVerification userVerification = new UserVerification("test@test.com", "verification_link");
         Response response = APP_EXTENSION.client()
                 .target(resourcePath)
@@ -79,7 +79,7 @@ public class NotificationServiceIntegrationTest extends AbstractIntegrationTest 
     }
 
     @Test
-    public void resetPasswordSuccessTest() throws InterruptedException {
+    public void resetPasswordSuccessTest() {
         Recipient recipient = new Recipient("test@test.com");
         Response response = APP_EXTENSION.client()
                 .target(resourcePath)
