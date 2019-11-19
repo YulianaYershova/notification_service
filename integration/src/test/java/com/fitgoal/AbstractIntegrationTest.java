@@ -37,7 +37,6 @@ public class AbstractIntegrationTest {
 
     protected static DropwizardAppExtension<NotificationServiceConfiguration> APP_EXTENSION;
     protected final URI resourcePath = URI.create("http://localhost:" + APP_EXTENSION.getLocalPort() + "/notifications");
-    protected final OkHttpClient okHttpClient = new OkHttpClient();
 
     @ClassRule
     public static final GenericContainer mongoContainer = new GenericContainer("mongo:" + MONGO_VERSION)

@@ -21,6 +21,7 @@ import static org.eclipse.jetty.http.HttpStatus.UNPROCESSABLE_ENTITY_422;
 abstract class BaseClient {
 
     private static final MediaType JSON_MEDIA_TYPE = MediaType.parse("application/json; charset=utf-8");
+    private static final String NOTIFICATIONS = "notifications";
     private final OkHttpClient okHttpClient;
     private final ObjectMapper mapper;
     private final HttpUrl resourceUrl;
@@ -77,6 +78,7 @@ abstract class BaseClient {
 
     HttpUrl buildSubresourceHttpUrl(String... subresourcePaths) {
         HttpUrl.Builder builder = resourceUrl.newBuilder();
+        builder.addPathSegment(NOTIFICATIONS);
         Arrays.stream(subresourcePaths).forEach(builder::addPathSegment);
         return builder.build();
     }
