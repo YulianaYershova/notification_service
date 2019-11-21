@@ -19,6 +19,7 @@ import static org.eclipse.jetty.http.HttpStatus.NO_CONTENT_204;
 
 public class NotificationClientTest {
 
+    private static final String NOTIFICATIONS = "notifications";
     private static final String REGISTER = "register";
     private static final String RESET_PASSWORD = "resetPassword";
     private static final String SUCCESS = "success";
@@ -89,6 +90,7 @@ public class NotificationClientTest {
 
     private HttpUrl buildSubresourceHttpUrl(String... subresourcePaths) {
         HttpUrl.Builder builder = resourceRoot.newBuilder();
+        builder.addPathSegment(NOTIFICATIONS);
         Arrays.stream(subresourcePaths).forEach(builder::addPathSegment);
         return builder.build();
     }

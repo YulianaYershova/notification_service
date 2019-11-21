@@ -15,6 +15,7 @@
         <module>web</module>
         <module>dao</module>
         <module>http-client</module>
+        <module>integration</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -49,6 +50,11 @@
             <dependency>
                 <groupId>com.fit_goal</groupId>
                 <artifactId>service</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fit_goal</groupId>
+                <artifactId>http-client</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
