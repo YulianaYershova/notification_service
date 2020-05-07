@@ -1,4 +1,5 @@
-# notification_service
+# Dropwizard App
+## notification_service
 
 ### Running Application
 
