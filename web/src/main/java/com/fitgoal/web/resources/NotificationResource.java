@@ -13,7 +13,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 @Path("/notifications")
 @Produces(MediaType.APPLICATION_JSON)
@@ -35,10 +34,10 @@ public class NotificationResource {
     }
 
     @POST
-    @Path("/register/success")
+    @Path("/register/confirm")
     @Timed
-    public void registerSuccess(@NotNull @Valid Recipient recipient) {
-        notificationService.registerSuccess(recipient);
+    public void confirmRegistration(@NotNull @Valid Recipient recipient) {
+        notificationService.confirmRegistration(recipient);
     }
 
     @POST
@@ -49,9 +48,9 @@ public class NotificationResource {
     }
 
     @POST
-    @Path("/resetPassword/success")
+    @Path("/resetPassword/confirm")
     @Timed
-    public void resetPasswordSuccess(@NotNull @Valid Recipient recipient) {
-        notificationService.resetPasswordSuccess(recipient);
+    public void confirmPasswordReset(@NotNull @Valid Recipient recipient) {
+        notificationService.confirmPasswordReset(recipient);
     }
 }

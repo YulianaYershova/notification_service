@@ -12,7 +12,6 @@ import static com.fitgoal.dao.util.AuditDtoFields.DATE;
 import static com.fitgoal.dao.util.AuditDtoFields.EVENT;
 import static com.fitgoal.dao.util.AuditDtoFields.SERVICE_NAME;
 
-
 @UtilityClass
 public class AuditMongoConverter {
 

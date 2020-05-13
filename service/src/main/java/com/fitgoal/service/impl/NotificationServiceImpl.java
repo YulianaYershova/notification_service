@@ -37,11 +37,11 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void registerSuccess(Recipient recipient) {
-        String subject = Notification.SUCCESS_REGISTRATION.getSubject();
-        String message = Notification.SUCCESS_REGISTRATION.getMessage();
+    public void confirmRegistration(Recipient recipient) {
+        String subject = Notification.CONFIRM_REGISTRATION.getSubject();
+        String message = Notification.CONFIRM_REGISTRATION.getMessage();
         sendMessage(recipient.getEmail(), subject, message);
-        registerEvent("user_service", "sending successful notification");
+        registerEvent("user_service", "sending confirmation notification");
     }
 
     @Override
@@ -53,11 +53,11 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void resetPasswordSuccess(Recipient recipient) {
-        String subject = Notification.SUCCESS_RESET_PASSWORD.getSubject();
-        String message = Notification.SUCCESS_RESET_PASSWORD.getMessage();
+    public void confirmPasswordReset(Recipient recipient) {
+        String subject = Notification.CONFIRM_PASSWORD_RESET.getSubject();
+        String message = Notification.CONFIRM_PASSWORD_RESET.getMessage();
         sendMessage(recipient.getEmail(), subject, message);
-        registerEvent("user_service", "sending successful notification");
+        registerEvent("user_service", "sending confirmation notification");
     }
 
     private void sendMessage(String email, String subject, String message) {

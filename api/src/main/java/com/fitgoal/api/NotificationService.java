@@ -12,7 +12,7 @@ public interface NotificationService {
     /**
      * Sends notifications to user about successful registration
      */
-    void registerSuccess(Recipient recipient);
+    void confirmRegistration(Recipient recipient);
 
     /**
      * Sends verification link when user tries to reset password
@@ -22,5 +22,5 @@ public interface NotificationService {
     /**
      * Sends notifications to user about successful password resetting
      */
-    void resetPasswordSuccess(Recipient recipient);
+    void confirmPasswordReset(Recipient recipient);
 }

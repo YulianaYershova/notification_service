@@ -17,7 +17,7 @@ public class NotificationClient extends BaseClient implements NotificationServic
 
     private static final String REGISTER = "register";
     private static final String RESET_PASSWORD = "resetPassword";
-    private static final String SUCCESS = "success";
+    private static final String CONFIRM = "confirm";
 
     public NotificationClient(OkHttpClient okHttpClient, HttpUrl resourceUrl) {
         this(okHttpClient, buildDefaultMapper(), resourceUrl);
@@ -35,8 +35,8 @@ public class NotificationClient extends BaseClient implements NotificationServic
     }
 
     @Override
-    public void registerSuccess(Recipient recipient) {
-        HttpUrl httpUrl = buildSubresourceHttpUrl(REGISTER, SUCCESS);
+    public void confirmRegistration(Recipient recipient) {
+        HttpUrl httpUrl = buildSubresourceHttpUrl(REGISTER, CONFIRM);
         Request request = buildRequest(recipient,httpUrl);
         executeRequest(request);
     }
@@ -49,8 +49,8 @@ public class NotificationClient extends BaseClient implements NotificationServic
     }
 
     @Override
-    public void resetPasswordSuccess(Recipient recipient) {
-        HttpUrl httpUrl = buildSubresourceHttpUrl(RESET_PASSWORD, SUCCESS);
+    public void confirmPasswordReset(Recipient recipient) {
+        HttpUrl httpUrl = buildSubresourceHttpUrl(RESET_PASSWORD, CONFIRM);
         Request request = buildRequest(recipient,httpUrl);
         executeRequest(request);
     }

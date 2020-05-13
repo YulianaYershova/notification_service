@@ -18,8 +18,4 @@ public class MailerConfiguration {
     private String username;
     @NotNull
     private String password;
-    @NotNull
-    private String fromName;
-    @NotNull
-    private String fromAddress;
 }

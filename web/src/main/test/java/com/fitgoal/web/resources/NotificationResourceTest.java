@@ -66,7 +66,7 @@ public class NotificationResourceTest {
 
     @Test
     public void registerIncorrectEmailTest() {
-        UserVerification userVerification = new UserVerification("testtest.com", "link");
+        UserVerification userVerification = new UserVerification("test.com", "link");
 
         Response response = resource.target(RESOURCE_PATH)
                 .path("/register")
@@ -80,27 +80,27 @@ public class NotificationResourceTest {
     }
 
     @Test
-    public void registerSuccessTest() {
+    public void confirmRegistrationTest() {
         Recipient recipient = new Recipient("test@test.com");
 
         Response response = resource.target(RESOURCE_PATH)
-                .path("register/success")
+                .path("register/confirm")
                 .request()
                 .method("POST", Entity.json(recipient));
 
         assertThat(response).isNotNull();
         assertThat(response.getStatus()).isEqualTo(204);
 
-        verify(notificationService).registerSuccess(any(Recipient.class));
+        verify(notificationService).confirmRegistration(any(Recipient.class));
         verifyNoMoreInteractions(notificationService);
     }
 
     @Test
-    public void registerSuccessIllegalArgumentsTest() {
+    public void confirmRegistrationIllegalArgumentsTest() {
         Recipient recipient = new Recipient();
 
         Response response = resource.target(RESOURCE_PATH)
-                .path("register/success")
+                .path("register/confirm")
                 .request()
                 .method("POST", Entity.json(recipient));
 
@@ -142,27 +142,27 @@ public class NotificationResourceTest {
     }
 
     @Test
-    public void resetPasswordSuccessTest() {
+    public void confirmPasswordResetTest() {
         Recipient recipient = new Recipient("test@test.com");
 
         Response response = resource.target(RESOURCE_PATH)
-                .path("/resetPassword/success")
+                .path("/resetPassword/confirm")
                 .request()
                 .method("POST", Entity.json(recipient));
 
         assertThat(response).isNotNull();
         assertThat(response.getStatus()).isEqualTo(204);
 
-        verify(notificationService).resetPasswordSuccess(any(Recipient.class));
+        verify(notificationService).confirmPasswordReset(any(Recipient.class));
         verifyNoMoreInteractions(notificationService);
     }
 
     @Test
-    public void resetPasswordSuccessIllegalArgumentsTest() {
+    public void confirmPasswordResetIllegalArgumentsTest() {
         Recipient recipient = new Recipient();
 
         Response response = resource.target(RESOURCE_PATH)
-                .path("/resetPassword/success")
+                .path("/resetPassword/confirm")
                 .request()
                 .method("POST", Entity.json(recipient));
 

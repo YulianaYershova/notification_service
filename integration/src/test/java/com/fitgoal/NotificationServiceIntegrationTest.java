@@ -40,7 +40,7 @@ public class NotificationServiceIntegrationTest extends AbstractIntegrationTest 
 
     @Test
     public void registerIncorrectEmailTest() {
-        UserVerification userVerification = new UserVerification("testtest.com", "link");
+        UserVerification userVerification = new UserVerification("test.com", "link");
 
         Response response = APP_EXTENSION.client()
                 .target(resourcePath)
@@ -53,11 +53,11 @@ public class NotificationServiceIntegrationTest extends AbstractIntegrationTest 
     }
 
     @Test
-    public void registerSuccessTest() {
+    public void confirmRegistrationTest() {
         Recipient recipient = new Recipient("test@test.com");
         Response response = APP_EXTENSION.client()
                 .target(resourcePath)
-                .path("/register/success")
+                .path("/register/confirm")
                 .request()
                 .post(Entity.json(recipient));
 
@@ -79,11 +79,11 @@ public class NotificationServiceIntegrationTest extends AbstractIntegrationTest 
     }
 
     @Test
-    public void resetPasswordSuccessTest() {
+    public void confirmPasswordResetTest() {
         Recipient recipient = new Recipient("test@test.com");
         Response response = APP_EXTENSION.client()
                 .target(resourcePath)
-                .path("/resetPassword/success")
+                .path("/resetPassword/confirm")
                 .request()
                 .post(Entity.json(recipient));
 

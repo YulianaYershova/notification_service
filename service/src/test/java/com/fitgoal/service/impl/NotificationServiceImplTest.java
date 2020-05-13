@@ -38,9 +38,9 @@ public class NotificationServiceImplTest {
     }
 
     @Test
-    public void registerSuccessTest() {
+    public void confirmRegistrationTest() {
         Recipient recipient = TestHelper.buildRecipient();
-        notificationServiceImpl.registerSuccess(recipient);
+        notificationServiceImpl.confirmRegistration(recipient);
         verify(mailSenderImpl).sendMail(Mockito.anyString(), Mockito.anyString(), Mockito.anyString());
         verify(auditDao).create(ArgumentMatchers.any(AuditDto.class));
     }
@@ -54,9 +54,9 @@ public class NotificationServiceImplTest {
     }
 
     @Test
-    public void resetPasswordSuccessTest() {
+    public void confirmPasswordResetTest() {
         Recipient recipient = TestHelper.buildRecipient();
-        notificationServiceImpl.resetPasswordSuccess(recipient);
+        notificationServiceImpl.confirmPasswordReset(recipient);
         verify(mailSenderImpl).sendMail(Mockito.anyString(), Mockito.anyString(), Mockito.anyString());
         verify(auditDao).create(ArgumentMatchers.any(AuditDto.class));
     }

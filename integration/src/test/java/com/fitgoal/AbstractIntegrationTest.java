@@ -20,8 +20,6 @@ import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.ConfigOverride;
 
-import okhttp3.OkHttpClient;
-
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class AbstractIntegrationTest {
 

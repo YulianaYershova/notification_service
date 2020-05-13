@@ -22,7 +22,7 @@ public class NotificationClientTest {
     private static final String NOTIFICATIONS = "notifications";
     private static final String REGISTER = "register";
     private static final String RESET_PASSWORD = "resetPassword";
-    private static final String SUCCESS = "success";
+    private static final String CONFIRM = "confirm";
 
     @Rule
     public MockWebServer mockWebServer = new MockWebServer();
@@ -45,15 +45,15 @@ public class NotificationClientTest {
     }
 
     @Test
-    public void registerSuccess() throws InterruptedException {
+    public void confirmRegistration() throws InterruptedException {
         Recipient recipient = new Recipient("test@test.com");
 
         mockWebServer.enqueue(new MockResponse().setResponseCode(NO_CONTENT_204));
 
-        notificationClient.registerSuccess(recipient);
+        notificationClient.confirmRegistration(recipient);
         RecordedRequest recordedRequest = mockWebServer.takeRequest();
 
-        HttpUrl httpUrl = buildSubresourceHttpUrl(REGISTER, SUCCESS);
+        HttpUrl httpUrl = buildSubresourceHttpUrl(REGISTER, CONFIRM);
 
         assertThat(recordedRequest.getRequestUrl()).isEqualTo(httpUrl);
         assertThat(recordedRequest.getMethod()).isEqualTo(HttpMethod.POST);
@@ -75,14 +75,14 @@ public class NotificationClientTest {
     }
 
     @Test
-    public void resetPasswordSuccess() throws InterruptedException {
+    public void confirmPasswordReset() throws InterruptedException {
         Recipient recipient = new Recipient("test@test.com");
 
         mockWebServer.enqueue(new MockResponse().setResponseCode(NO_CONTENT_204));
 
-        notificationClient.resetPasswordSuccess(recipient);
+        notificationClient.confirmPasswordReset(recipient);
         RecordedRequest recordedRequest = mockWebServer.takeRequest();
-        HttpUrl httpUrl = buildSubresourceHttpUrl(RESET_PASSWORD, SUCCESS);
+        HttpUrl httpUrl = buildSubresourceHttpUrl(RESET_PASSWORD, CONFIRM);
 
         assertThat(recordedRequest.getRequestUrl()).isEqualTo(httpUrl);
         assertThat(recordedRequest.getMethod()).isEqualTo(HttpMethod.POST);
